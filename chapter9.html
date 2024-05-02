@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,24 +64,147 @@
     </style>
 
 </head>
+
 <body>
-    
+
     <header>
         <a href="index.html">Back to Index</a>
     </header>
-    
+
     <h2>Chapter 9: Data Smoothing</h2>
 
     <h3>Table of Contents</h3>
     <ul>
-        <!-- <li><a href="#pca">Principal Component Analysis</a></li> -->
-        <!-- <li><a href="#ica">Independent Component Analysis</a></li> -->
+        <li><a href="#kde">Kernel Density Estimates</a></li>
+        <li><a href="#adapt">Adaptive Smoothing</a></li>
+        <li><a href="nonparam-regress">Nonparametric Regression</a></li>
+        <ul>
+            <li><a href="#nw">Nadaraya-Watson Estimator</a></li>
+            <li><a href="#spline">Spline Smoothing</a></li>
+        </ul>
     </ul>
+
+    <h3 id="kde">Kernel Density Estimates</h3>
+
+    <p>
+        Kernel Density Estimation (KDE) is a non-parametric method used to estimate the probability density function of
+        a random variable based on a sample of data points.
+    </p>
+
+    <p>
+        Given a set of \( n \) data points \( x_1, x_2, ..., x_n \), KDE estimates the probability density function \(
+        f(x) \) as a weighted sum of kernel functions centered at each data point:
+    </p>
+
+    \[ \hat{f}(x, h) = \frac{1}{n \cdot h} \sum_{i=1}^{n} K\left(\frac{x - x_i}{h}\right) \]
+
+    where \( K \) is the kernel function and \( h \) is the bandwidth, a smoothing parameter that controls the width of
+    the kernels.
+
+    </p>
+
+    <h4>Kernel Functions:</h4>
+
+    <p>
+        The choice of kernel function affects the smoothness of the estimated density function. Commonly used kernel
+        functions include:
+
+    <ol>
+        <li>Gaussian: \( K(y) = \frac{1}{\sqrt{2\pi}} e^{-y^2/2} \)</li>
+        <li>Epanechnikov: \( K(y) = \frac{3}{4} (1 - y^2) \) for \( |y| \leq 1 \)</li>
+        <li>Uniform or Boxcar: \( K(y) = \frac{1}{2} \) for \( |y| \leq 1 \)</li>
+    </ol>
+    </p>
+
+    <h4>Bandwidth Selection:</h4>
+
+    <p>
+        The bandwidth \( h \) determines the level of smoothing in KDE. A smaller bandwidth results in a smoother
+        estimate but may oversmooth the data, while a larger bandwidth may capture more details but could lead to noise.
+        Thus, the choice of the bandwidth is more important in practice than the choice of the kernel function.
+        Silverman's
+        rule of thumb is a popular method for bandwidth selection in KDE. It is given by:
+
+        \[ h = 0.9 \cdot \min\left(\text{std}(x), \frac{\text{IQR}(x)}{1.34}\right) \cdot n^{-1/5} \]
+
+        where \( \text{std}(x) \) is the standard deviation of the data, \( \text{IQR}(x) \) is the interquartile range,
+        and \( n \) is the number of data points.
+    </p>
+
+    <h3 id="adapt">Adaptive Smoothing</h3>
+    <p>
+        Adaptive Kernel Estimators are a type of kernel density estimation method where the bandwidth of the kernel is
+        adaptively adjusted based on the local density of the data. This allows for more flexible and accurate density
+        estimates, especially in regions with varying data density.
+    </p>
+
+    <p>
+        In Adaptive Kernel Estimators, the bandwidth \( h \) is not fixed but varies across the dataset or within local
+        regions. The goal is to have smaller bandwidths in denser regions to capture fine details and larger bandwidths
+        in sparser regions to prevent oversmoothing.
+    </p>
+
+    <h4>Advantages:</h4>
+
+    <ul>
+        <li>Adaptive Kernel Estimators can provide more accurate estimates by adjusting the bandwidth to local data
+            characteristics.</li>
+        <li>They can handle datasets with varying density and complex structures more effectively than fixed bandwidth
+            methods.</li>
+        <li>Adaptive Kernel Estimators are robust to the choice of bandwidth, reducing the need for manual tuning.</li>
+    </ul>
+
+    <h3 id="nonparam-regress">Nonparametric Regression</h3>
+
+    <h4 id="nw">Nadaraya-Watson Estimator</h4>
+
+    <p>
+        The Nadaraya-Watson Estimator is a non-parametric kernel regression method used for estimating conditional
+        expectations or regression functions from data.
+    </p>
+
+    <p>
+        Given a set of \( n \) data points \( (x_i, y_i) \), where \( x_i \) are the input variables and \( y_i \) are
+        the corresponding responses, the unknown bivariate probability density function \( f(x,y) \) can be estimated by
+        a bivariate product kernel density estimator:
+
+        \[ \hat{f}(x,y) = \frac{1}{nh_xh_y} \sum_{i=1}^{n} K\left(\frac{x - x_i}{h_x}\right) K\left(\frac{y -
+        y_i}{h_y}\right) \]
+
+        where \( K \) is the kernel function, \( h_x \) and \( h_y \) are the bandwidths for the input and response
+        variables, respectively. The estimated regression function is given by:
+
+        \[ \hat{r}(x) = \frac{\sum_{i=1}^{n} y_i K\left(\frac{x - x_i}{h_x}\right)}{\sum_{i=1}^{n} K\left(\frac{x -
+        x_i}{h_x}\right)} \]
+
+        Just like other kernel methods, the choice of kernel function and bandwidths is crucial for the performance of
+        the Nadaraya-Watson Estimator.
+    </p>
+
+    <h4 id="spline">Spline Smoothing</h4>
+
+    <p>
+        Spline Smoothing is a non-parametric regression technique that fits a piecewise polynomial function to the data
+        to capture the underlying trend without making strong assumptions about the functional form.
+    </p>
+
+    <p>
+        The basic idea behind spline smoothing is to divide the data range into smaller intervals and fit a low-degree
+        polynomial to each interval. The polynomials are then connected smoothly at the boundaries to create a
+        continuous curve that approximates the data.
+    </p>
+
+    <p>
+        Spline Smoothing can be implemented using different types of splines, such as natural splines, cubic splines, or
+        B-splines (basis splines). The choice of spline type and the number of knots (breakpoints) determine the
+        flexibility and smoothness of the fitted curve.
+    </p>
 
     <footer>
         <a href="chapter8.html" style="float: left;">Previous Chapter</a>
         <a href="chapter10.html" style="float: right;">Next Chapter</a>
     </footer>
-    
+
 </body>
+
 </html>
