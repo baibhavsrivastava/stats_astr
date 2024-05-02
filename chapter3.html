@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Regression</title>
+    <!-- Include MathJax for rendering LaTeX equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif, serif, mono;
+            margin: 20px;
+        }
+
+        header,
+        footer {
+            background-color: #ffffff;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #000000;
+            font-size: 2em;
+            text-decoration: underline double;
+        }
+
+        h3 {
+            color: #000000;
+            font-size: 1.5em;
+            text-decoration: underline;
+        }
+
+        h4 {
+            color: #000000;
+            font-size: 1.2em;
+        }
+
+        h5 {
+            color: #000000;
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 10px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        em {
+            color: #333;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <a href="index.html">Back to Index</a>
+    </header>
+
+    <h2>Chapter 3: Regression</h2>
+
+    <h3>Table of Contents</h3>
+    <ul>
+        <li><a href="#ols">Ordinary Least Squares Regression</a></li>
+        <li><a href="#robust">Robust Regression</a></li>
+        <li><a href="#weight-ls">Weighted Least Squares</a></li>
+        <li><a href="#logistic">Logistic Regression</a></li>
+    </ul>
+
+    Regression is a class of statistical analyses that involve estimating functional relationships between a dependent
+    variable \(Y\) , also called the response variable, and one or more independent variables, \(\mathbf{X}\). This can
+    either be used to make predictions or to understand the relationship between the variables. The simplest form of
+    regression is linear regression, where the relationship between the dependent and independent variables is assumed
+    to be linear. The general form of a linear regression model is given by:
+
+    \[ Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \ldots + \beta_pX_p + \epsilon \]
+
+    where \(\beta_0\) is the intercept, \(\beta_1, \beta_2, \ldots, \beta_p\) are the coefficients of the independent
+    variables, \(X_1, X_2, \ldots, X_p\), and \(\epsilon\) is the error term. The error term captures the variability in
+    the dependent variable that is not explained by the independent variables. This variability can be due to
+    measurement error or due to some intrinsic scatter in the data. The goal of linear regression is to
+    estimate the coefficients \(\beta_0, \beta_1, \beta_2, \ldots, \beta_p\) that minimize the sum of squared errors
+    between the observed and predicted values of the dependent variable.
+
+    <h5> "Linear Models" might not be "Linear" </h5>
+    The critical criterion is linearity in the model parameters, not in the model variables. This means that the model
+    can be linear in the parameters even if the relationship between the dependent and independent variables is not
+    linear. For example, the model \(Y = \beta_0 + \beta_1X_1 + \beta_2X_2^2\) is a linear model because it is linear in
+    the parameters \(\beta_0, \beta_1, \beta_2\), even though it is quadratic in \(X_2\). On the contrary, the model
+    \(Y = (\beta_0 + \beta_1X_1)^{\beta_2}\) is not a linear model because it is not linear in the parameters.
+
+    <h3 id="ols">Ordinary Least Squares Regression</h3>
+
+    <p>
+        Ordinary Least Squares (OLS) regression is a widely used method for estimating the relationship between one
+        or
+        more independent variables and a dependent variable. It is a linear regression technique that aims to find
+        the
+        line (or hyperplane in higher dimensions) that best fits the observed data points by minimizing the sum of
+        squared differences between the observed and predicted values.
+    </p>
+
+    <p>
+        In a simple linear regression with one independent variable \( x \) and one dependent variable \( y \), the
+        relationship can be represented as:
+    </p>
+
+    <p style="text-align: center;">
+        \( y = \beta_0 + \beta_1x + \varepsilon \)
+    </p>
+
+    <p>
+        where \( \beta_0 \) is the intercept, \( \beta_1 \) is the slope, and \( \varepsilon \) represents the error
+        term. The goal is to estimate the coefficients \( \beta_0 \) and \( \beta_1 \) that minimize the Residual
+        Sum of Squares (RSS):
+        \[\min RSS = \min \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 = \min \sum_{i=1}^{n} (y_i - \beta_0 - \beta_1x_i)^2\]
+    </p>
+
+    <p>
+        The OLS method finds the values of \( \beta_0 \) and \( \beta_1 \) that minimize the RSS by taking the
+        partial derivatives of the RSS with respect to \( \beta_0 \) and \( \beta_1 \) and setting them to zero.
+        The resulting parameter estimates are:
+
+        \[ \hat{\beta}_1 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2} \]
+        \[ \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x} \]
+
+        where \( \bar{x} \) and \( \bar{y} \) are the sample means of the independent and dependent variables,
+        respectively.
+    </p>
+
+    <p>
+        When the true variance of the error term \( \varepsilon \) is known (which is often the case), the OLS
+        are not unbiased. The confidence intervals for \(Y\) at a specific value of \(X\) is then given by
+
+        \[ \hat{Y}(x) = \hat{\beta}_0 + \hat{\beta}_1x \pm t_{\alpha/2, n-2} S \sqrt{1 + \frac{1}{n} \frac{(x -
+        \bar{x})^2}{\sum_{i=1}^{n} (x_i - \bar{x})^2}} \]
+
+        where \(t_{\alpha/2, n-2}\) is the t-statistic for the desired confidence level, \(n\) is the number of
+        observations, and \(S\) is the sample standard deviation.
+    </p>
+
+    <p>
+        The OLS method can be extended to multiple linear regression with more than one independent variable. In
+        this case, the relationship between the dependent variable \( y \) and the independent variables \( x_1,
+        x_2, \ldots, x_p \) can be represented as:
+
+        \[ y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_px_p + \varepsilon \]
+
+        The goal is to estimate the coefficients \( \beta_0, \beta_1, \beta_2, \ldots, \beta_p \) that minimize the
+        RSS. The parameter estimates can be obtained using matrix algebra:
+
+        \[ \hat{\beta} = (X^TX)^{-1}X^Ty \]
+
+        where \( \hat{\beta} \) is the vector of parameter estimates, \( X \) is the design matrix of independent
+        variables, and \( y \) is the vector of dependent variable values.
+    </p>
+
+    <p>
+        A demonstration of the Central Limit Theorem can be found <a
+            href="https://seeing-theory.brown.edu/regression-analysis/index.html#section1">here</a>.
+    </p>
+
+    <h3 id="robust">Robust Regression</h3>
+
+    <p>
+        Robust statistics provide strategies to reduce the influence of outliers when scientific knowledge of the
+        identity of the discordant data points is not available.
+        As is evident, the OLS method is sensitive to outliers, which can have a significant impact on the estimated
+        regression coefficients. Robust regression techniques are used
+        in such cases to provide more reliable estimates of the regression coefficients.
+    </p>
+
+    <h4>M-estimation</h4>
+
+    <p>
+        M-estimation is a robust regression method that minimizes a robust objective function \( \rho \) instead of the
+        squared residuals used in OLS regression. For any function \(\psi\), any solution \( \hat{\beta}_M \) of the
+        equation
+
+        \[ \sum_{i=1}^{n} \psi \left( y_i - \hat{\beta}_Mx_i\right) x_i = 0 \]
+
+        is called an M-estimator. Some common choices for the function \( \psi \) include:
+
+    <ol>
+        <li>Huber Estimator: \( \psi(x) = \begin{cases} -c & \text{if } x < -c \\ x & \text{if } -c \leq x \leq c \\ c &
+                \text{if } x> c \end{cases} \)</li>
+        <li>Tukey's biweight function: \( \psi(x) = \begin{cases} x(c^2 - x^2)^2 & \text{if } |x| < c \\ 0 &
+                \text{otherwise} \end{cases} \)</li>
+    </ol>
+
+    </p>
+
+    <h4>Thiel-Sen Median Slope Method</h4>
+
+    <p>
+        The Thiel-Sen median slope method is a robust non-parametric technique for estimating the slope of a linear
+        relationship between two variables. Instead of minimizing a criterion function, this method calculates the
+        median slope of all possible pairs of data points, making it less sensitive to outliers compared to OLS
+        regression.
+    </p>
+
+    <h3 id="weight-ls">Weighted Least Squares</h3>
+
+    <p>
+        Weighted Least Squares (WLS) is a regression technique that accounts for heteroscedasticity, where the variance
+        of the errors may not be constant across observations. In physics and astronomy, WLS is particularly useful when
+        the variability in the data is not uniform and different observations have different levels of precision or
+        uncertainty.
+    </p>
+
+    <p>
+        In WLS, each observation is assigned a weight \( w_i \) that reflects its relative importance or precision.
+        An obvious choice for the weights is the inverse of the variance of the error term, \( w_i =
+        \frac{1}{\sigma_i^2} \).
+        The objective is to minimize the weighted sum of squared residuals, given by:
+    </p>
+
+    <p style="text-align: center;">
+        \( \sum_{i=1}^{n} w_i(y_i - \hat{y}_i)^2 = \sum_{i=1}^{n} \frac{1}{\sigma_i^2}(y_i - \beta_0 - \beta_1x_i)^2 \)
+    </p>
+
+    <p>
+        The parameter estimates in WLS can be obtained by minimizing the weighted sum of squared residuals, similar to
+        OLS. The resulting parameter estimates are:
+
+        \[ \hat{\beta}_1 = \frac{\sum_{i=1}^{n} (x_i - \bar{x}_w)(y_i - \bar{y}_w)/\sigma_i^2}{\sum_{i=1}^{n} (x_i -
+        \bar{x}_w)^2/\sigma_i^2} \]
+        \[ \hat{\beta}_0 = \bar{y}_w - \hat{\beta}_1 \bar{x}_w \]
+
+        where \( \bar{x}_w \) and \( \bar{y}_w \) are the weighted sample means of the independent and dependent
+        variables, respectively.
+
+    </p>
+
+    <p>
+        An example of the use of OLS and WLS in presence of heteroscedasticity and homoscedasticity is shown below:
+    <div style="display: flex;">
+        <img src="ols_vs_wls_norm.png" style="width: 50%;" alt="homoscedasticity">
+        <img src="ols_vs_wls.png" style="width: 50%;" alt="heteroscedasticity">
+    </div>
+    It is evident that OLS is biased in the presence of heteroscedasticity, while WLS provides more accurate
+    estimates of the regression coefficients. Note that oth OLS and WLS provide similar estimates in the case of
+    homoscedasticity.
+    </p>
+
+
+    <h3 id="logistic">Logistic Regression</h3>
+
+    <p>
+        Logistic regression is a regression analysis technique used for predicting the outcome of a categorical
+        dependent variable based on one or more independent variables. It is commonly used when the dependent variable
+        is binary or dichotomous, meaning it has only two possible outcomes.
+    </p>
+
+    <p>
+        In logistic regression, the relationship between the independent variables \( X \) and the probability of the
+        dependent variable \( Y \) being in a particular category is modeled using the logistic function:
+    </p>
+
+    <p style="text-align: center;">
+        \( P(Y=1|X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X)}} \)
+    </p>
+
+    <p>
+        The logistic function ensures that the predicted probabilities lie between 0 and 1, making it suitable for
+        binary classification problems. 
+    </p>
+
+    <footer>
+        <a href="chapter2.html" style="float: left;">Previous Chapter</a>
+        <a href="chapter4.html" style="float: right;">Next Chapter</a>
+    </footer>
+</body>
+
+</html>

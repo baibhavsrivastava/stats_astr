@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Multivariate Statistics</title>
+    <!-- Include MathJax for rendering LaTeX equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif, serif, mono;
+            margin: 20px;
+        }
+
+        header,
+        footer {
+            background-color: #ffffff;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #000000;
+            font-size: 2em;
+            text-decoration: underline double;
+        }
+
+        h3 {
+            color: #000000;
+            font-size: 1.5em;
+            text-decoration: underline;
+        }
+
+        h4 {
+            color: #000000;
+            font-size: 1.2em;
+        }
+
+        h5 {
+            color: #000000;
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 10px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        em {
+            color: #333;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html">Back to Index</a>
+    </header>
+    
+    <h2>Chapter 5: Multivariate Statistics</h2>
+
+    <h3>Table of Contents</h3>
+    <ul>
+        <li><a href="#pca">Principal Component Analysis</a></li>
+        <li><a href="#ica">Independent Component Analysis</a></li>
+    </ul>
+
+    <h3 id="pca">Principal Component Analysis</h3>
+
+    <p>
+        Principal Component Analysis (PCA) is a technique used to reduce the dimensionality of multivariate data while
+        preserving most of its variability. It achieves this by transforming the original variables into a new set of
+        uncorrelated variables called principal components, which are linear combinations of the original variables.
+    </p>
+
+    <p>
+        Given a data matrix \( X \) with \( n \) observations and \( p \) variables, PCA seeks to find a set of \( p \)
+        orthonormal vectors (principal components) \( \textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_p \) such that the
+        first principal component \( \textbf{Z}_1 \) explains the maximum variance, the second principal component \(
+        \textbf{PC}_2 \) explains the maximum remaining variance orthogonal to \( \textbf{PC}_1 \), and so on.
+
+    </p>
+
+    <h4>Procedure:</h4>
+
+    <ol>
+        <li>Standardize the data: Center the data by subtracting the mean and scale it by dividing by the standard
+            deviation to ensure all variables have comparable scales.</li>
+        <li>Compute the covariance matrix: Calculate the covariance matrix \( \textbf{C} \) of the standardized data.
+        </li>
+        <li>Find the eigenvectors and eigenvalues: Compute the eigenvectors \( \textbf{v}_1, \textbf{v}_2, \ldots,
+            \textbf{v}_p \) and corresponding eigenvalues \( \lambda_1, \lambda_2, \ldots, \lambda_p \) of \( \textbf{C}
+            \).</li>
+        <li>Sort the eigenvectors: Sort the eigenvectors in decreasing order of their corresponding eigenvalues.</li>
+        <li>Select the principal components: Choose the first \( k \) eigenvectors corresponding to the \( k \) largest
+            eigenvalues to form the new basis.</li>
+        <li>Transform the data: Project the original data onto the new basis to obtain the principal components.</li>
+    </ol>
+
+    <p>
+        PCA is used for dimensionality reduction, data visualization, and noise reduction in multivariate data analysis.
+        It helps in identifying patterns, clusters, and relationships between variables, making it a valuable tool in
+        exploratory data analysis and feature extraction.
+    </p>
+
+    <h3 id="ica">Independent Component Analysis</h3>
+
+    <p>
+        Independent Component Analysis (ICA) is a statistical technique used to separate a multivariate signal into
+        additive, independent components. It assumes that the observed data are linear combinations of independent
+        source signals corrupted by noise.
+    </p>
+
+    <p>
+        Given a data matrix \( X \) with \( n \) observations and \( p \) variables, ICA seeks to find a linear
+        transformation \( \textbf{A} \) such that the components of \( \textbf{S} = \textbf{X} \cdot \textbf{A} \) are
+        statistically independent.
+    </p>
+
+    <h4>Comparison Between PCA and ICA</h4>
+
+    <table style="margin: 0 auto; border-collapse: collapse;">
+        <tr>
+            <th style="border: 1px solid black; padding: 5px;">PCA</th>
+            <th style="border: 1px solid black; padding: 5px;">ICA</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; padding: 5px;">PC1 and PC2 are uncorrelated</td>
+            <td style="border: 1px solid black; padding: 5px;">IC1 and IC2 are uncorrelated</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; padding: 5px;">PC1 and PC2 are always orthonormal</td>
+            <td style="border: 1px solid black; padding: 5px;">IC1 and IC2 need not be orthonormal</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; padding: 5px;">Maximizes variance</td>
+            <td style="border: 1px solid black; padding: 5px;">Maximizes non-Gaussianity</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black; padding: 5px;">PC1 is not independent of PC2</td>
+            <td style="border: 1px solid black; padding: 5px;">IC1 is independent of IC2</td>
+        </tr>
+    </table>
+
+    <p>
+        While PCA is based on the covariance matrix and maximizes variance, ICA is based on the non-Gaussianity of the
+        data and maximizes the independence of the components. PCA is useful for dimensionality reduction and data
+        visualization, while ICA is used for source separation and blind signal separation.
+    </p>
+
+    <footer>
+        <a href="chapter4.html" style="float: left;">Previous Chapter</a>
+        <a href="chapter6.html" style="float: right;">Next Chapter</a>
+    </footer>
+
+</body>
+
+</html>

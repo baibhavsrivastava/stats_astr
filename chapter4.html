@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Time Series Analysis</title>
+    <!-- Include MathJax for rendering LaTeX equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif, serif, mono;
+            margin: 20px;
+        }
+
+        header,
+        footer {
+            background-color: #ffffff;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #000000;
+            font-size: 2em;
+            text-decoration: underline double;
+        }
+
+        h3 {
+            color: #000000;
+            font-size: 1.5em;
+            text-decoration: underline;
+        }
+
+        h4 {
+            color: #000000;
+            font-size: 1.2em;
+        }
+
+        h5 {
+            color: #000000;
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 10px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        em {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html">Back to Index</a>
+    </header>
+
+    <h2>Chapter 4: Time Series Analysis</h2>
+
+    <h3>Table of Contents</h3>
+    <ul>
+        <li><a href="#even">Evenly Spaced Data</a></li>
+        <ul>
+            <li><a href="#acf">Autocorrelation Function</a></li>
+            <li><a href="#pacf">Partial Autocorrelation Function</a></li>
+            <li><a href="#arma">ARMA Models</a></li>
+            <li><a href="#arima">ARIMA Models</a></li>
+            <li><a href="#fourier">Fourier Analysis</a></li>
+        </ul>
+        <li><a href="#uneven">Unevenly Spaced Data</a></li>
+        <ul>
+            <li><a href="#lomb-scargle">Lomb-Scargle Periodogram</a></li>
+            <!-- <li><a href="#robust">Robust Regression</a></li> -->
+            <!-- <li><a href="#weight-ls">Weighted Least Squares</a></li> -->
+            <!-- <li><a href="#logistic">Logistic Regression</a></li> -->
+        </ul>
+
+        <h3 id="even">Evenly Spaced Data</h3>
+
+        <h4 id="acf">Autocorrelation Function</h4>
+        <p>
+            The autocorrelation function (ACF) is a measure of the correlation between a time series and a lagged
+            version of
+            itself. It is used to identify the presence of serial correlation in the data. The ACF is defined as:
+            \[
+            ACF(k) = \frac{\sum_{t=1}^{n-k} (X_t - \bar{X})(X_{t+k} - \bar{X})}{\sum_{t=1}^{n} (X_t - \bar{X})^2}
+            \]
+        </p>
+
+        <h5>Interpretation:</h5>
+        <ul>
+            <li>If \( ACF(k) \) is close to 1, it indicates a strong positive autocorrelation at lag \( k \), meaning
+                that
+                values at time \( t \) and time \( t - k \) tend to move in the same direction.</li>
+            <li>If \( ACF(k) \) is close to -1, it indicates a strong negative autocorrelation at lag \( k \), meaning
+                that
+                values at time \( t \) and time \( t - k \) tend to move in opposite directions.</li>
+            <li>If \( ACF(k) \) is close to 0, it indicates no autocorrelation at lag \( k \), meaning that values at
+                time
+                \( t \) and time \( t - k \) are not correlated.</li>
+        </ul>
+
+        <p>
+            ACF plots are commonly used to identify the order of autoregressive (AR) and moving average (MA) processes
+            in
+            time series models such as ARIMA (Autoregressive Integrated Moving Average). Peaks in the ACF plot can help
+            determine the seasonal and non-seasonal components of the series.
+        </p>
+        <p>
+            The ACF and Lag-k scatter plot for a noisy sinusoidal time series is shown below:
+        </p>
+        <div style="display: flex;">
+            <div style="flex: 1;">
+                <div style="display: flex; flex-direction: column;">
+                    <img src="sinusoidal_data.png" alt="sine" style="width: 100%;">
+                    <img src="acf.png" alt="acf" style="width: 100%;">
+                </div>
+            </div>
+            <div style="flex: 2;">
+                <img src="lag_plots.png" alt="lag" style="width: 70%;">
+            </div>
+        </div>
+
+        One can clearly see the sinusoidal pattern in the time series data, and the corresponding peaks in the ACF plot
+        at about a period of 4. The Lag-k scatter plot also shows the correlation between the time series and its lagged
+        version at different lags, showing strong correlation at lag 4 and its multiples. The negative peaks at 2 and 6
+        show the half-period effect of the sinusoidal pattern.
+
+        <h4 id="pacf">Partial Autocorrelation Function</h4>
+        <p>
+            The partial autocorrelation function (PACF) is a measure of the correlation between a time series and a
+            lagged
+            version of itself, after removing the effects of the intermediate lags. It is used to identify the order of
+            the
+            autoregressive (AR) component in time series models. </p>
+
+        <p>
+            The PACF thus does not model the autocorrelation of the original time series, but
+            gives insight into the time-scales responsible for the autocorrelated behavior.
+        </p>
+
+        <h4 id="arma">Autoregressive Moving Average (ARMA) Models</h4>
+
+        <p>
+            Autoregressive Moving Average (ARMA) models are a class of time series models that combine autoregressive
+            (AR)
+            and moving average (MA) components to describe the structure of a time series. ARMA models are used to
+            forecast
+            future values based on past observations and to understand the underlying patterns and trends in the data.
+        </p>
+
+        <p>
+            An ARMA(p, q) model is represented by the following equation:
+            \[X_i = \alpha_1 X_{i-1} + \ldots + \alpha_p X_{i-p} + \varepsilon_i + \beta_1 \varepsilon_{i-1} + \ldots +
+            \beta_q \varepsilon_{i-q}\]
+
+            where \(X_i\) is the value of the time series at time \(i\), \(\alpha_1, \ldots, \alpha_p\) are the
+            autoregressive
+            parameters, \(\varepsilon_i\) is the white noise error term at time \(i\), and \(\beta_1, \ldots, \beta_q\)
+            are
+            the
+            moving average parameters.
+        </p>
+
+        <p>
+            The parameters \( p \) and \( q \) are determined based on the autocorrelation function (ACF) and partial
+            autocorrelation function (PACF) of the time series data. The AR component captures the long-term
+            dependencies in
+            the data, while the MA component accounts for short-term fluctuations and random noise.
+        </p>
+
+        <h4 id="arima">Autoregressive Integrated Moving Average (ARIMA) Models</h4>
+
+        <p>
+            Autoregressive Integrated Moving Average (ARIMA) models are a class of time series models that combine
+            autoregressive (AR), differencing (I), and moving average (MA) components to describe the structure of a
+            time
+            series. ARIMA models are used when the data is non-stationary, i.e. has systematic trends or seasonality
+            that
+            need to be removed before modeling.
+        </p>
+
+        <p>
+            An ARIMA(p, d, q) model has \(p\) parameters giving the autoregressive dependence of the current value on
+            past
+            measured values, \(d\) parameters giving the number of differencing operations needed to account for drifts
+            in
+            mean values (\(d = 1\) corresponds to the random walk), and \(q\) parameters
+            giving the autoregressive dependence on past noise values.
+        </p>
+
+        <h4 id="fourier">Fourier Analysis</h4>
+
+        <p>
+            Fourier Power Spectrum Analysis is a technique used in time series analysis to decompose a signal into its
+            frequency components. It is based on the Fourier transform, which transforms a time-domain signal into its
+            frequency-domain representation.
+        </p>
+
+        <h5>Fourier Transform:</h5>
+
+        <p>
+            The Fourier transform converts a time series \( y(t) \) into its frequency-domain representation \( Y(f) \)
+            using the following equation:
+        </p>
+
+        <p style="text-align: center;">
+            \( Y(f) = \int_{-\infty}^{\infty} y(t) \cdot e^{-2\pi i f t} \, dt \)
+        </p>
+
+        <p>
+            where \( f \) is the frequency.
+        </p>
+
+        <h5>Power Spectrum:</h5>
+
+        <p>
+            The power spectrum represents the distribution of power (or energy) of the signal across different
+            frequencies.
+            It is calculated as the squared magnitude of the Fourier transform:
+        </p>
+
+        <p style="text-align: center;">
+            \( P(f) = |Y(f)|^2 \)
+        </p>
+
+        <p>
+            The power spectrum provides information about the dominant frequencies present in the signal and their
+            relative
+            strengths.
+        </p>
+
+        <p>
+            Fourier Power Spectrum can be used to analyze periodic or oscillatory signals. It helps in identifying the
+            dominant frequencies in the data, detecting periodic patterns, and understanding the underlying processes.
+        </p>
+
+        <p>
+            The Fourier Power Spectrum of a noisy double sine wave signal is shown below:
+        <div style="display: flex;">
+            <img src="double_sine_wave.png" style="width: 50%;" alt="double">
+            <img src="fourier_power_spectrum.png" style="width: 50%;" alt="fourier">
+        </div>
+
+        One can see the two dominant peaks in the power spectrum corresponding to the two sine wave components of the
+        signal.
+        </p>
+
+        <h3 id="uneven">Unevenly Spaced Data</h3>
+
+        <h4 id="lomb-scargle">Lomb-Scargle Periodogram</h4>
+
+        <p>
+            The Lomb-Scargle Periodogram is a method used for detecting periodic signals in unevenly sampled time series
+            data. It is particularly useful in astronomy and other fields where observations may be irregularly spaced
+            or
+            have gaps.
+        </p>
+
+        <p>
+            The Lomb-Scargle periodogram computes the power spectrum of a time series, similar to the Fourier power
+            spectrum, but it is optimized for unevenly sampled data. It calculates the power at each frequency \( f \)
+            using
+            the following equation:
+
+            \[ P_{\text{LS}}(f) = \frac{1}{2\sigma^2} \left[ \frac{\left(\sum_i X_i \cos(2\pi f t_i)\right)^2}{\sum_i
+            \cos^2(2\pi f (t_i - \tau) )} + \frac{\left(\sum_i X_i \sin(2\pi f t_i)\right)^2}{\sum_i \sin^2(2\pi f (t_i
+            - \tau) )} \right] \]
+
+            where:
+
+        <ul>
+            <li> \( P(f) \) is the power at frequency \( f \).</li>
+            <li> \( X_i \) are the data values at time \( t_i \).</li>
+            <li> \( \sigma^2 \) is the variance of the data.</li>
+            <li> \( \tau \) is defined as
+                \[ \tan(4\pi f \tau) = \frac{\sum_i \sin(4\pi f t_i)}{\sum_i \cos(4\pi f t_i)} \]
+            </li>
+        </ul>
+        </p>
+
+        <p>
+            The Lomb-Scargle periodogram is used to identify periodic signals in time series data, even when the data
+            are irregularly sampled.
+        </p>
+
+        <h4 id="wavelet">Wavelet Analysis</h4>
+
+        <p>
+            Wavelet analysis is a powerful technique used for analyzing time series data at different scales or
+            resolutions. It is particularly useful for detecting localized patterns, abrupt changes, and transient
+            phenomena in the data. The wavelet transform, like the Fourier transform, translates the information of a
+            time series into another space through convolution with an orthonormal basis function. But unlike the
+            Fourier transform, the wavelet transform is well-suited to nonstationary phenomena, particularly if the
+            variations occur on a range of temporal scales or over small portions of the time series.
+        </p>
+
+        <p>
+            Wavelet analysis decomposes a time series into its time-frequency components using wavelet functions, which
+            are mathematical functions that oscillate at different frequencies and are localized in both time and
+            frequency domains. The wavelet transform of \(X_i\) at scale \(s\) and time \(t\) is given by:
+
+            \[ W(s, t) = \frac{1}{\sqrt{s}} \int_{-\infty}^{\infty} X_i g\left(\frac{t - t'}{s}\right) \, dt' \]
+
+            where \(g\) is a simple basis function called the mother wavelet. The wavelet transform provides a
+            time-frequency representation of the data, allowing for the detection of localized features and time-varying
+            patterns.
+
+        <footer>
+            <a href="chapter3.html" style="float: left;">Previous Chapter</a>
+            <a href="chapter5.html" style="float: right;">Next Chapter</a>
+        </footer>
+
+</body>
+
+</html>

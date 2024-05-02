@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Nonparametric Statistics</title>
+    <!-- Include MathJax for rendering LaTeX equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif, serif, monospace;
+            margin: 20px;
+        }
+
+        header,
+        footer {
+            background-color: #ffffff;
+            padding: 5px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        h2 {
+            color: #000000;
+            font-size: 2em;
+            text-decoration: underline double;
+        }
+
+        h3 {
+            color: #000000;
+            font-size: 1.5em;
+            text-decoration: underline;
+        }
+
+        h4 {
+            color: #000000;
+            font-size: 1.2em;
+        }
+
+        h5 {
+            color: #000000;
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 10px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        em {
+            color: #333;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html">Back to Index</a>
+    </header>
+
+    <h2>Chapter 2: Nonparametric Statistics</h2>
+
+    <h3>Table of Contents</h3>
+    <ul>
+        <li><a href="#ks-statistic">Kolmogorov-Smirnov Statistics</a></li>
+        <li><a href="#wilcoxon">Wilcoxon Sum of Ranks Test</a></li>
+        <li><a href="#spearman">Spearman Rank Correlation Test</a></li>
+        <li><a href="#others">Other Important Non-parametric Tests</a></li>
+        <li><a href="#contingency">Contingency Tables</a></li>
+    </ul>
+
+    Nonparametric statistics fall into two categories: (a) procedures that do not involve or depend on parametric
+    assumptions, though the underlying population distribution may belong to a particular parametric family; and (b)
+    methods that do not require that the data belong to a particular parametric family of distributions.
+    These techniques can be very useful when the data comes from an unknown distribution or the sample size is too small
+    to make any assumptions about the underlying distribution.
+
+    <h3 id="ks-statistic">Kolmogorov-Smirnov (KS) Statistic and Test</h3>
+
+    <p>
+        The Kolmogorov-Smirnov (KS) statistic and its associated test are fundamental tools in non-parametric statistics
+        for comparing two probability distributions. It uses the ordered sample to construct an upper and lower step
+        function such that the underlying distribution is bounded between these two functions.
+        The KS test builds on the idea that the distribution of \(\sup_{x} |F(x) - S_n(x)|\) does not depend on \(F\)
+        when \(F\) is continuous. Here \(F\) is the true distribution function and \(S_n\) is the empirical distribution
+        function.
+
+        In the context of physics and astronomy, the KS test is
+        particularly useful for assessing whether two samples come from the same underlying distribution, without making
+        assumptions about the specific form of that distribution.
+    </p>
+
+    <h4>Kolmogorov-Smirnov Statistic:</h4>
+
+    <p>
+        The KS statistic, denoted as \(D\), measures the maximum discrepancy between the empirical cumulative
+        distribution
+        functions (CDFs) of two samples. Mathematically, it is defined as:
+    </p>
+
+    <p style="text-align: center;">
+        \( D = \max \left( \left| F_1(x) - F_2(x) \right| \right) \)
+    </p>
+
+    <p>
+        where \( F_1(x) \) and \( F_2(x) \) are the empirical CDFs of the two samples being compared.
+    </p>
+
+    <h4>KS Test:</h4>
+
+    <p>
+        The KS test assesses whether two samples are drawn from the same underlying distribution. The null hypothesis \(
+        H_0 \) states that the samples are from the same distribution. The test statistic \(D\) is compared against
+        critical
+        values from the Kolmogorov-Smirnov distribution to determine the significance level.
+    </p>
+
+    <h4>Example:</h4>
+
+    <p><strong>Scenario:</strong> Suppose we have two datasets: one containing the observed magnitudes of stars in a
+        particular region of the sky, and another containing the expected magnitudes based on a theoretical model of
+        stellar populations. For the sake of simplicity, let's say that the theoretical model suggests that the
+        magnitutdes of stars are normally distributed with a mean of 5 and a standard deviation of 1.5.
+        The figure below shows the empirical CDFs of the observed (the said normal distribution with some noise) and
+        theoretical magnitudes.</p>
+    </p>
+
+    <div style="display: flex; align-items: center;">
+        <div style="flex: 1;">
+            <p><strong>Hypothesis:</strong></p>
+            <ul>
+                <li>\( H_0 \): The observed magnitudes and the theoretical model magnitudes come from the same
+                    distribution.</li>
+                <li>\( H_1 \): The observed magnitudes and the theoretical model magnitudes come from different
+                    distributions.</li>
+            </ul>
+
+            <p><strong>Procedure:</strong></p>
+            <ol>
+                <li>Compute the empirical CDFs for both datasets.</li>
+                <li>Calculate the KS statistic \(D\).</li>
+                <li>Compare \(D\) against the critical value from the KS distribution at the desired significance level.
+                </li>
+                <li>If \(D\) exceeds the critical value, reject the null hypothesis, indicating that the two datasets
+                    likely come from different distributions.</li>
+            </ol>
+
+            <p><strong>Interpretation:</strong></p>
+            <p>If the null hypothesis is rejected, it suggests that there are significant differences between the
+                observed and
+                theoretical distributions of stellar magnitudes in the given region of the sky. This could indicate
+                discrepancies between the actual stellar population and the assumptions made in the theoretical model.
+            </p>
+
+            <p><strong>Conclusion:</strong></p>
+            <p>The KS test provides a powerful tool for comparing distributions in astronomy, allowing researchers to
+                validate
+                theoretical models against observational data and gain insights into the nature of celestial objects.
+            </p>
+
+
+        </div>
+        <div style="flex: 1;">
+            <img src="empirical_cdf.png" alt="The Empirical Distribution Function for the Data and the Model"
+                style="display: block; margin: 0 auto;">
+        </div>
+    </div>
+
+    <h3 id="wilcoxon">Wilcoxon Sum of Ranks Test</h3>
+
+    <p>
+        The Wilcoxon Sum of Ranks test, also known as the Wilcoxon signed-rank test, is a non-parametric statistical
+        test used to compare two paired samples and determine if they differ significantly in terms of their medians.
+        One must note that median is a much more robust measure of central tendency than the mean, and is less affected
+        by
+        outliers or skewed data. The Wilcoxon test is particularly useful for situations where the data may not follow a
+        normal distribution or when sample sizes are small.
+    </p>
+
+    <h4>Procedure:</h4>
+
+    <ol>
+        <li>Calculate the differences between paired observations.</li>
+        <li>Discard the pairs with a difference of zero.</li>
+        <li>Rank the absolute values of the differences, starting from the smallest (ties are given the average of the
+            ranks they would occupy).</li>
+        <li>Sum the ranks of the positive or negative differences, depending on the direction of the hypothesis.</li>
+        <li>Use the obtained sum to determine the significance level, typically through reference to tables of critical
+            values or through computational methods.</li>
+    </ol>
+
+    <h4>Example:</h4>
+
+    <p>
+        The Wilcoxon test can be used to compare the luminosity of two different types of stars in a
+        sample. For instance, one might compare the luminosity of white dwarfs to that of main-sequence stars to
+        determine if there is a significant difference in their median luminosity.
+    </p>
+
+    <p><strong>Scenario:</strong> Suppose we have two datasets: one containing the luminosity measurements of a sample
+        of white dwarfs and another containing the luminosity measurements of a sample of main-sequence stars.</p>
+
+    <p><strong>Hypothesis:</strong></p>
+    <ul>
+        <li>\( H_0 \): The median luminosity of white dwarfs is the same as the median luminosity of main-sequence
+            stars.</li>
+        <li>\( H_1 \): The median luminosity of white dwarfs is different from the median luminosity of main-sequence
+            stars.</li>
+    </ul>
+
+    <p><strong>Procedure:</strong></p>
+    <ol>
+        <li>Calculate the differences in luminosity between each white dwarf and main-sequence star pair.</li>
+        <li>Discard pairs where the difference is zero.</li>
+        <li>Rank the absolute differences and sum the ranks of the positive or negative differences, depending on the
+            direction of the hypothesis.</li>
+        <li>Use the sum of ranks to determine the significance level.</li>
+    </ol>
+
+    <p><strong>Interpretation:</strong></p>
+    <p>If the null hypothesis is rejected, it suggests that there is a significant difference in the median luminosity
+        between white dwarfs and main-sequence stars. This could indicate fundamental differences in their evolutionary
+        paths or physical properties.</p>
+
+    <p><strong>Conclusion:</strong></p>
+    <p>The Wilcoxon Sum of Ranks test provides a robust alternative to parametric tests when data does not meet the
+        assumptions of normality or when sample sizes are small. </p>
+
+
+    <h3 id="spearman">Spearman Rank Correlation Test</h3>
+
+    <p>
+        The Spearman rank correlation test is a non-parametric method used to assess the strength and direction of
+        association between two variables. It evaluates whether there is a monotonic relationship between the ranks of
+        the variables, without assuming a specific distribution for the data. In physics and astronomy, where
+        relationships between variables may be nonlinear or non-normally distributed, the Spearman test provides a
+        valuable tool for analyzing data.
+    </p>
+
+    <h4>Procedure:</h4>
+
+    <ol>
+        <li>Rank the values of both variables separately, from lowest to highest.</li>
+        <li>Calculate the differences between the ranks of corresponding pairs.</li>
+        <li>Compute the Spearman's rank correlation coefficient (\( \rho \)) using the formula (in the absence of ties):
+        </li>
+        <p style="text-align: center;">
+            \[ \rho = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)} \]
+        </p>
+        <li>Use the obtained value of \( \rho \) to determine the strength and direction of the correlation.</li>
+    </ol>
+
+    <h4>Example:</h4>
+
+    <p>
+        In astronomy, the Spearman rank correlation test can be applied to investigate the relationship between the
+        luminosity and temperature of stars in a particular region of the sky.
+    </p>
+
+    <p><strong>Scenario:</strong> Suppose we have a dataset containing the luminosity and temperature measurements of a
+        sample of stars.</p>
+
+    <p><strong>Hypothesis:</strong></p>
+    <ul>
+        <li>\( H_0 \): There is no monotonic relationship between the luminosity and temperature of stars.</li>
+        <li>\( H_1 \): There is a monotonic relationship between the luminosity and temperature of stars.</li>
+    </ul>
+
+    <p><strong>Procedure:</strong></p>
+    <ol>
+        <li>Rank the luminosity and temperature values separately.</li>
+        <li>Calculate the differences between the ranks of corresponding pairs.</li>
+        <li>Compute the Spearman's rank correlation coefficient \( \rho \).</li>
+        <li>Interpret the value of \( \rho \) to determine the strength and direction of the correlation.</li>
+    </ol>
+
+    <p><strong>Interpretation:</strong></p>
+    <p>A positive value of \( \rho \) indicates a positive monotonic relationship, meaning that as one variable
+        increases, the other tends to increase as well. Conversely, a negative value of \( \rho \) indicates a negative
+        monotonic relationship.</p>
+
+    <p><strong>Conclusion:</strong></p>
+    <p>The Spearman rank correlation test is a versatile tool for assessing relationships between variables in physics
+        and astronomy, providing insights into the underlying structure of observational data.</p>
+
+    <h3 id="others">Other Important Non-parametric Tests</h3>
+
+    <p>
+        In addition to the Kolmogorov-Smirnov test, Wilcoxon signed-rank test, and Spearman rank correlation test, there
+        are several other important non-parametric tests commonly used in physics and astronomy for various analytical
+        purposes.
+    </p>
+
+    <h4>Anderson-Darling Test</h4>
+
+    <p>
+        The Anderson-Darling test is used to assess whether a sample comes from a specific distribution, such as the
+        normal distribution. It provides a more sensitive test than the Kolmogorov-Smirnov test for detecting deviations
+        from the hypothesized distribution.
+    </p>
+
+    <h4>Kendall's Tau Test</h4>
+
+    <p>
+        Kendall's Tau test is a measure of the association between two measured quantities. It assesses the ordinal
+        association between variables, making it suitable for analyzing ranked or ordered data.
+    </p>
+
+    <h3 id="contingency">Contingency Tables</h3>
+    <p>
+        Contingency tables, also known as cross-tabulation tables, are used to summarize and analyze the relationship
+        between two or more <strong>categorical</strong> variables. These tables provide a structured way to examine the
+        distribution of data across different categories and identify patterns or associations between variables.
+    </p>
+
+    <p>
+        A contingency table organizes the data into rows and columns, with each cell representing the count or frequency
+        of occurrences for a particular combination of categories.
+    </p>
+
+    <h4>Analysis of Contingency Tables:</h4>
+
+    <p>
+        The Null Hypothesis in the context of contingency tables is that there is no association between the variables,
+        and the observed frequencies are due to chance. Various statistical tests can be applied to contingency tables
+        to determine whether there is a significant
+        association between the variables. Some common tests include:
+    </p>
+
+    <ul>
+        <li><strong>Chi-Square Test:</strong> Determines whether there is a significant association between two
+            categorical variables. It compares the observed frequencies in the contingency table to the frequencies that
+            would be expected under the null hypothesis of independence.</li>
+        <li><strong>Fisher's Exact Test:</strong> Similar to the chi-square test but used when sample sizes are small.
+            It calculates the exact probability of observing the contingency table's values under the null hypothesis.
+        </li>
+        <li><strong>G-test:</strong> A likelihood ratio test used to compare the observed frequencies in a contingency
+            table with the expected frequencies under a specified model.</li>
+    </ul>
+
+    <h4>Example - Fisher's Exact Test:</h4>
+    Consider the following contingency table that shows the distribution of heights (tall, short)
+    among males and females in a sample of individuals:
+
+    <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
+        <tr>
+            <th style="border: 1px solid black;"></th>
+            <th style="border: 1px solid black;">Male</th>
+            <th style="border: 1px solid black;">Female</th>
+        </tr>
+        <tr>
+            <th style="border: 1px solid black;">Tall</th>
+            <td style="border: 1px solid black;">9</td>
+            <td style="border: 1px solid black;">3</td>
+        </tr>
+        <tr>
+            <th style="border: 1px solid black;">Short</th>
+            <td style="border: 1px solid black;">21</td>
+            <td style="border: 1px solid black;">17</td>
+        </tr>
+        <tr>
+            <th style="border: 1px solid black;">Total</th>
+            <td style="border: 1px solid black;">30</td>
+            <td style="border: 1px solid black;">20</td>
+        </tr>
+    </table>
+
+    <p><strong>Null Hypothesis:</strong> There is no association between the heights and gender of individuals in the
+        sample. Thus, the odds ratio should be 1.</p>
+
+    We are interested in finding the probability of observing the given distribution of heights just by chance.
+    So, we want to find the probability that given 12 tall and 38 short individuals, and we sample 20 out of that, then
+    what is the probability of getting 3 tall and 17 short individuals in the sample.
+    This probability can be calculated as:
+    \[ P = \frac{{\binom{12}{3} \times \binom{38}{17}}}{{\binom{50}{20}}} \]
+    which is basically a hypergoemetric distribution.
+
+    <p>The probability that one would obtain using this hypergoemetric distribution will be slightly different that than
+        obtained using the Fisher's Exact Test. This is particularly because of the presence of "Nuisance Parameters".
+        In our calculations, we considered a fixed number of males and females. However, in reality, these numbers are
+        random and can vary. The Fisher's Exact Test takes into account these variations and provides a more accurate
+        probability of observing the given distribution of heights.</p>
+
+
+    <footer>
+        <a href="chapter1.html" style="float: left;">Previous Chapter</a>
+        <a href="chapter3.html" style="float: right;">Next Chapter</a>
+    </footer>
+
+</body>
+
+</html>

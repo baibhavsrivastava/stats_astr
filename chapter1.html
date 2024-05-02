@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Introductory Concepts</title>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: sans-serif, serif, monospace;
+            margin: 20px;
+        }
+
+        header,
+        footer {
+            background-color: #ffffff;
+            padding: 5px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        h2 {
+            color: #000000;
+            font-size: 2em;
+            text-decoration: underline double;
+        }
+
+        h3 {
+            color: #000000;
+            font-size: 1.5em;
+            text-decoration: underline;
+        }
+
+        h4 {
+            color: #000000;
+            font-size: 1.2em;
+        }
+
+        h5 {
+            color: #000000;
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 10px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        em {
+            color: #333;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html">Back to Index</a>
+    </header>
+
+    <h2>Chapter 1: Introductory Concepts</h2>
+
+    <h3>Table of Contents</h3>
+    <ul>
+        <li><a href="#basic-definitions">Basic Definitions</a></li>
+        <li><a href="#popular-probability-distributions">Some Popular Probability Distributions</a></li>
+        <li><a href="#central-limit-theorem">The Central Limit Theorem</a></li>
+        <li><a href="#maximum-likelihood-estimators">Maximum Likelihood Estimators</a></li>
+        <li><a href="#confidence-intervals">Confidence Intervals</a></li>
+        <li><a href="#hypothesis-testing">Hypothesis Testing</a></li>
+        <li><a href="#resampling-methods">Resampling Methods</a></li>
+    </ul>
+
+    <h3 id="basic-definitions"> Basic Definitions </h3>
+
+    <ul>
+        <li> <strong> <em>Sample Space </em> (\(S\)) </strong> : Set of all possible outcomes of an experiment.
+        </li>
+        <li> <strong> <em>Event </em> (\(E\)) </strong> : Subset of the sample space. </li>
+        <li> <strong> <em> Random Variable </em> (\(X\))</strong> : A function that assigns a real number to each
+            outcome in the sample space, i.e. \( X: S \rightarrow \mathcal{R} \) </li>
+        <li> <strong> <em> Probability Distribution Function </em> </strong> : A function that assigns a probability
+            to each possible value of the random variable.
+            \[ f(x) = P(X = x) : \text{Range}(X) \rightarrow [0, 1] \ni \sum f(x_i) = 1 \quad\text{ Or, }\quad
+            \int_{-\infty}^{\infty}f(x)dx = 1\] </li>
+        <li> <strong> <em> Cumulative Distribution Function </em> </strong> :
+            \[ F(X) = P(X \leq x) = \sum_{x_i \leq x}f(x_i) \quad\text{ Or, }\quad \int_{-\infty}^{x}f(x)dx \]</li>
+        <li> <strong> <em> Expected Value </em></strong> :
+            \[ E[g(X)] = \sum g(x_i)f(x_i) \quad\text{ Or, }\quad \int_{-\infty}^{\infty}g(x)f(x)dx \] </li>
+        <li> <strong> <em> Moments </em> </strong> :
+            \[ \mu_n = E[X^n] \text{ for } n = 1, 2, 3, \ldots \] </li>
+        <li> <strong> <em> Mean </em> </strong> :
+            \[ \mu = E[X] \] </li>
+        <li> <strong> <em> Variance </em> </strong> : Second moment about the mean,
+            \[ Var(X) = \sigma^2 = E[(X - \mu)^2] = E[X^2] - \mu^2 = \mu_2 - \mu^2\]
+            where \(\sigma\) is the standard deviation. </li>
+        </li>
+        <li> <strong> <em> Covariance </em> </strong> :
+            \[ Cov(X, Y) = E[(X - \mu_X)(Y - \mu_Y)] = E[XY] - \mu_X\mu_Y \] </li>
+        <li> <strong> <em> Quantile Function </em> </strong> :
+            \[ Q(p) = F^{-1}(p) = \inf\{x : F(x) \geq p\} \] </li>
+        <li> <strong> <em> Homoscedasticity </em> </strong> : Constant variance of the errors in measurement. </li>
+    </ul>
+
+    <h3 id="popular-probability-distributions"> Some Popular Probability Distributions </h3>
+
+    <h4> Discrete Distributions </h4>
+
+    <ul>
+        <li> <strong> <em> Bernoulli Distribution </em> </strong> :
+            <br>
+            The distribution of a random variable that takes the value 1 with probability \( p \) and 0 with
+            probability \( 1 - p \), i.e. it represents the outcome of a single trial of a dichomotous experiment.
+            \[ f(x) = p^x(1 - p)^{1 - x} \text{ for } x = 0, 1 \text{ and } 0 \leq p \leq 1 \]
+            Mean = \( p \), Variance = \( p(1 - p) \)
+        </li>
+        <li> <strong> <em> Binomial Distribution </em> </strong> :
+            <br>
+            The distribution of the number of successes in \( n \) independent Bernoulli trials.
+            \[ f(x) = \binom{n}{x}p^x(1 - p)^{n - x} \text{ for } x = 0, 1, 2, \ldots, n \text{ and } 0 \leq p \leq
+            1 \]
+            Mean = \( np \), Variance = \( np(1 - p) \)
+        </li>
+        <li> <strong> <em> Poisson Distribution </em> </strong> :
+            \[ f(x) = \frac{\lambda^x}{x!}e^{-\lambda} \text{ for } x = 0, 1, 2, \ldots \text{ and } \lambda > 0 \]
+            Mean = \( \lambda \), Variance = \( \lambda \)
+        </li>
+    </ul>
+
+    <h5> Why is the Poisson Distribution interesting? </h5>
+    <ol>
+        <li> It is a limit of the binomial distribution for large \( n \) and small \( p \). </li>
+        <li> It represents the number of arrivals in a fixed interval of time. </li>
+    </ol>
+
+    <h4> Continuous Distributions </h4>
+
+    <ul>
+        <li> <strong> <em> Uniform Distribution </em> </strong> :
+            \[ f(x) = \frac{1}{b - a} \text{ for } a \leq x \leq b \]
+            Mean = \( \frac{a + b}{2} \), Variance = \( \frac{(b - a)^2}{12} \)
+        </li>
+        <li> <strong> <em> Normal Distribution </em> </strong> :
+            \[ f(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x - \mu)^2}{2\sigma^2}} \text{ for } -\infty < x < \infty
+                \text{ and } \sigma> 0 \]
+                Mean = \( \mu \), Variance = \( \sigma^2 \)
+        </li>
+        <li> <strong> <em> Exponential Distribution </em> </strong> :
+            \[ f(x) = \lambda e^{-\lambda x} \text{ for } x \geq 0 \text{ and } \lambda > 0 \]
+            Mean = \( \frac{1}{\lambda} \), Variance = \( \frac{1}{\lambda^2} \)
+        </li>
+        <li> <strong> <em> Gamma Distribution </em> </strong> :
+            \[ f(x) = \frac{\lambda^{\alpha}x^{\alpha - 1}e^{-\lambda x}}{\Gamma(\alpha)} \text{ for } x \geq 0
+            \text{ and } \alpha, \lambda > 0 \]
+            Mean = \( \frac{\alpha}{\lambda} \), Variance = \( \frac{\alpha}{\lambda^2} \)
+        </li>
+        <li> <strong> <em> Beta Distribution </em> </strong> :
+            \[ f(x) = \frac{x^{\alpha - 1}(1 - x)^{\beta - 1}}{B(\alpha, \beta)} \text{ for } 0 \leq x \leq 1 \text{
+            and } \alpha, \beta > 0 \]
+            Mean = \( \frac{\alpha}{\alpha + \beta} \), Variance = \( \frac{\alpha\beta}{(\alpha + \beta)^2(\alpha +
+            \beta + 1)} \)
+        </li>
+        <li> <strong> <em> Chi-Squared Distribution </em> </strong> :
+            <br>
+            If \( X_1, X_2, \ldots, X_{\nu} \) are independent standard normal random variables, then the
+            distribution of the sum of their squares is a chi-squared distribution with \( \nu \) degrees of
+            freedom.
+            \[ f(x) = \chi_\nu^2 = \frac{x^{\frac{\nu}{2} -
+            1}e^{-\frac{x}{2}}}{2^{\frac{\nu}{2}}\Gamma(\frac{\nu}{2})} \text{ for } x \geq 0 \text{ and } \nu > 0
+            \]
+            Mean = \( \nu \), Variance = \( 2\nu \)
+        </li>
+        <li> <strong> <em> Student's t-Distribution </em> </strong> :
+            <br>
+            If \( X \) is a standard normal random variable and \( Y \) is a chi-squared random variable with \( \nu \)
+            degrees of freedom, then the distribution of \( \frac{X}{\sqrt{Y/\nu}} \) is a t-distribution with \( \nu \)
+            degrees of freedom.
+            \[ f(x) = t_\nu = \frac{\Gamma(\frac{\nu + 1}{2})}{\sqrt{\nu\pi}\Gamma(\frac{\nu}{2})}(1 +
+            \frac{x^2}{\nu})^{-\frac{\nu + 1}{2}} \text{ for } -\infty < x < \infty \text{ and } \nu> 0 \]
+                Mean = 0, Variance = \( \frac{\nu}{\nu - 2} \) for \( \nu > 2 \)
+
+                <p>If \(\bar{x}\) and \(s^2\) are the mean and variance of a random sample of size \(n\) from a nomral
+                    population with mean \(\mu\) and variance \(\sigma^2\) then \(\frac{\bar{x} - \mu}{s/\sqrt{n}}\)
+                    follows a t-distribution with \(n-1)\ degrees of freedom</p>
+        </li>
+    </ul>
+
+    <h3 id="central-limit-theorem">The Central Limit Theorem</h3>
+    <p>If \( X_1, X_2, \ldots, X_n \) are independent and identically distributed random variables with mean \( \mu
+        \) and variance \( \sigma^2 \), then the distribution of the sample mean \( \bar{X} = \frac{1}{n}\sum_{i =
+        1}^{n}X_i \) approaches a normal distribution as \( n \) approaches infinity. The mean of the sample mean is
+        \( \mu \) and the variance is \( \frac{\sigma^2}{n} \).</p>
+    <p>Interestingly, it doesn't matter what the distribution of the individual random variables is, the sample mean
+        will always be normally distributed. Furthermore, the distribution of \( \frac{\bar{X} -
+        \mu}{\sigma/\sqrt{n}} \) will look like a standard normal distribution, once \(n\) gets large enough. </p>
+    <p>This can also be thought of in terms of the signal-to-noise ratio. The signal is the mean of the random
+        variables and the noise is the variance, i.e. \(SNR = \frac{\bar{X}}{\sigma}\sqrt{n}\). As the number of
+        random variables increases, the signal-to-noise ratio increases and the distribution of the sample mean
+        becomes more and more peaked around the true mean.</p>
+
+    A demonstration of the Central Limit Theorem can be found <a
+        href="https://seeing-theory.brown.edu/probability-distributions/index.html#section3">here</a>.
+
+    <h3 id="maximum-likelihood-estimators">Maximum Likelihood Estimators</h3>
+    <p>Given a set of data \( x_1, x_2, \ldots, x_n \) that are independent and identically distributed according to
+        some probability distribution, the likelihood function is defined as the joint probability of the data given
+        the parameters of the distribution. The maximum likelihood estimator is the set of parameters that maximizes
+        the likelihood function. </p>
+    <p>Mathematically, the likelihood function is given by
+        \[ \mathcal{L}(\theta) = \prod_{i = 1}^{n}f(x_i; \theta) \]
+        where \( \theta \) is the set of parameters of the distribution and \( f(x_i; \theta) \) is the probability
+        density function of the distribution evaluated at \( x_i \).</p>
+    <p>It is often easier to work with the log-likelihood function, which is given by
+        \[ \ell(\theta) = \log\mathcal{L}(\theta) = \sum_{i = 1}^{n}\log f(x_i; \theta) \]</p>
+    <p>For the maximum likelihood estimator, the first derivative of the log-likelihood function with respect to the
+        parameters is set to zero, i.e.
+        \[ \frac{\partial\ell(\theta)}{\partial\theta} = 0 \]</p>
+    <p>For example, for normally distributed \(X_i\)s, if we want to find the best estimate of the mean, saying
+        \(\mu^\prime\) then,
+        \[ \frac{\partial\ell(\mu)}{\partial\mu} = 0 \]
+        \[ \sum_{i = 1}^{n}\frac{x_i - \mu^\prime}{\sigma_i^2} = 0 \]
+        \[ \mu^\prime = \frac{\sum_{i = 1}^{n}\frac{x_i}{\sigma_i^2}}{\sum_{i = 1}^{n}\frac{1}{\sigma_i^2}} \]
+        And if \( \sigma_i = \sigma \) for all \( i \), then the maximum likelihood estimator for the mean is simply
+        the sample mean.</p>
+
+    <h3 id="confidence-intervals">Confidence Intervals</h3>
+
+    <p>Given a random variable \( X \) with a probability distribution function \( f(x) \), the \( 100(1 - \alpha)
+        \) percent confidence interval for the parameter \( \theta \) is the interval \( [a, b] \) such that
+        \[ P(a \leq \theta \leq b)=1 - \alpha \] In other words, the confidence interval is the range of values that the
+        parameter is likely to fall in with a certain probability. </p>
+    <p>For example, the 95% confidence interval for the mean of a normal distribution is given by
+        \[ \bar{X} \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}} \]
+        where \( z_{\alpha/2} \) is the \( \alpha/2 \) quantile of the standard normal distribution.</p>
+
+    A demonstration of confidence intervals can be found <a
+        href="https://seeing-theory.brown.edu/frequentist-inference/index.html#section2">here</a>.
+
+    <h3 id="hypothesis-testing">Hypothesis Testing</h3>
+    <p>Hypothesis testing is a method of making decisions based on data. The process involves setting up two
+        competing
+        hypotheses, the null hypothesis \( H_0 \) and the alternative hypothesis \( H_1 \). The null
+        hypothesis is the
+        hypothesis that there is no effect or no difference, while the alternative hypothesis is the
+        hypothesis that
+        there is an effect or a difference.</p>
+    <p>The process of hypothesis testing involves calculating a test statistic from the data and comparing
+        it to a
+        critical value. If the test statistic is greater than the critical value, then the null hypothesis
+        is rejected
+        in favor of the alternative hypothesis. If the test statistic is less than the critical value, then
+        the null
+        hypothesis is not rejected.</p>
+    <p>The critical value is chosen based on the significance level of the test, denoted by \( \alpha \).
+        The
+        significance level is the probability of rejecting the null hypothesis when it is true. The test
+        statistic is calculated based on the data and the null hypothesis. For example, if we want to test
+        whether the mean of a sample is equal to a certain value, the test statistic is given by
+        \[ t = \frac{\bar{X} - \mu_0}{s/\sqrt{n}} \]
+        where \( \bar{X} \) is the sample mean, \( \mu_0 \) is the hypothesized mean, \( s \) is the sample
+        standard
+        deviation, and \( n \) is the sample size.</p>
+    <p>The critical value is chosen based on the distribution of the test statistic. For example, if the
+        test statistic
+        follows a t-distribution, the critical value is chosen from the t-distribution with \( n - 1 \)
+        degrees of
+        freedom.</p>
+
+    <h3 id="resampling-methods">Resampling Methods</h3>
+    We are often interested in estimating some population parameter (like mean, variance, etc.) from a sample of data.
+    Ideally, we would like to have several samples from the same population and calculate the parameter for each
+    sample. This would give us an idea of the variability of the parameter estimate, and biases if any. However, in
+    practice, we usually have only one sample. Resampling methods are a way to estimate the variability of the
+    parameter estimate from a single sample. They also allow for bias estimation. 
+
+    <h4>Jackknife</h4>
+    The basic idea of the jackknife is to estimate the bias in a parameter estimate by leaving out one observation at a
+    time and recalculating the parameter estimate. The bias is then estimated as the average of the differences between
+    the full sample estimate and the leave-one-out estimates. A sample of size \( n \) will have \( n \) leave-one-out
+    estimates, each with \( n - 1 \) observations. The bias is then estimated as
+    \[ \text{bias}_{\text{J}} = \frac{1}{n}\sum_{i = 1}^{n}[n\hat{\theta} - (n - 1)\hat{\theta}_{(i)}] \]
+    where \( \hat{\theta} \) is the parameter estimate from the full sample and \( \hat{\theta}_{(i)} \) is the
+    parameter estimate from the sample with the \( i \)th observation left out. 
+
+    <h5>Example</h5>
+    Consider a population \(\Sigma\) that is a uniform distribution on the interval \([0, a]\), where \(a\) is unknown.
+    We take a sample of size \(n\) from this population and estimate the maximum value of the population. The best estimate
+    of the maximum value is the maximum value of the sample
+    \[ \hat{\theta} = \max\{X_i\} = X_\max \]
+    where \(X_i\) are the observations in the sample. Note that this is a biased estimate of the maximum value of the
+    population. The estimate from each jackknife sample is
+    \[ \hat{\theta}_{(i)} = \max\{X_j : j \neq i\} = X_{\max-1} \quad\text{(The second highest value)} \]
+    The corrected jackknife estimate of the maximum value is then
+    \[ \hat{\theta}_{\text{J}} = \hat{\theta} - \text{bias}_{\text{J}} = X_\max + \frac{n-1}{n}(X_\max - X_{\max-1}) \]
+    Jackknife thus uses not only the maximum value but also the second highest value to estimate the maximum value of the
+    population. It is important to note that the jackknife reduces the bias, but does not eliminate it completely. Jackknife
+    can fix biases of \(O(1/n)\), but not of higher orders.
+
+    <h4>Bootstrap</h4>
+    Sample standard errors is often not a good estimate of the confidence interval of the population parameter. Small 
+    sample sizes and non-normality of the data can lead to incorrect confidence intervals. The bootstrap method is a
+    resampling method that estimates the variability of the parameter estimate by resampling the data with replacement.
+    The basic idea is to create a large number of bootstrap samples by sampling with replacement from the original sample.
+    The parameter estimate is then calculated for each bootstrap sample, and the variability of the parameter estimate is
+    estimated from the distribution of the bootstrap estimates. A sample of size \(n\) will have \(n^n\) possible
+    bootstrap samples. The best part of the bootstrap method is that is does not make any assumptions about the
+    the error intervals.
+    <br>
+    A demonstration of bootstrap can be found <a
+    href="https://seeing-theory.brown.edu/frequentist-inference/index.html#section3">here</a>.
+
+    <footer>
+        <a href="index.html" style="float: left;">Back to Index</a>
+        <a href="chapter2.html" style="float: right;">Next Chapter</a>
+    </footer>
+
+</body>
+
+</html>
