@@ -70,7 +70,7 @@
     <header>
         <a href="index.html">Back to Index</a>
     </header>
-    
+
     <h2>Chapter 5: Multivariate Statistics</h2>
 
     <h3>Table of Contents</h3>
@@ -147,10 +147,6 @@
             <td style="border: 1px solid black; padding: 5px;">IC1 and IC2 need not be orthonormal</td>
         </tr>
         <tr>
-            <td style="border: 1px solid black; padding: 5px;">Maximizes variance</td>
-            <td style="border: 1px solid black; padding: 5px;">Maximizes non-Gaussianity</td>
-        </tr>
-        <tr>
             <td style="border: 1px solid black; padding: 5px;">PC1 is not independent of PC2</td>
             <td style="border: 1px solid black; padding: 5px;">IC1 is independent of IC2</td>
         </tr>
@@ -161,6 +157,16 @@
         data and maximizes the independence of the components. PCA is useful for dimensionality reduction and data
         visualization, while ICA is used for source separation and blind signal separation.
     </p>
+
+    <h5>Example - Blind Source Separation</h5>
+
+    <p>
+        Consider a scenario where we have a set of mixed signals coming from an unknown number of sources. And lets say we have 
+        some microphones placed in different locations to record these signals. The recorded signals are a linear combination of
+        the original source signals, and the mixing process is unknown. ICA can be used to separate the original sources from
+        the mixed signals without knowing the mixing matrix.
+    </p>
+
 
     <footer>
         <a href="chapter4.html" style="float: left;">Previous Chapter</a>
