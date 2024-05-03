@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,24 +64,142 @@
     </style>
 
 </head>
+
 <body>
 
     <header>
         <a href="index.html">Back to Index</a>
     </header>
-    
+
     <h2>Chapter 8: Spatial Point Processes</h2>
 
     <h3>Table of Contents</h3>
     <ul>
-        <!-- <li><a href="#pca">Principal Component Analysis</a></li> -->
-        <!-- <li><a href="#ica">Independent Component Analysis</a></li> -->
+        <li><a href="#csr">Complete Spatial Randomness</a></li>
+        <li><a href="#spa_auto_corr">Spatial Autocorrelation</a></li>
+        <li><a href="#kriging">Kriging</a></li>
     </ul>
+
+    <h3 id="csr">Complete Spatial Randomness</h3>
+
+    <p>
+        In a spatial point process, complete spatial randomness refers to the absence of any systematic arrangement or
+        clustering of points in the study area. It implies that the occurrence of points is unpredictable and follows a
+        Poisson distribution with a constant intensity \( \lambda \).
+    </p>
+    <p>
+        The probability of finding \( n \) points in a region \( A \) is given by the Poisson distribution:
+        \[
+        P(N(A) = n) = \frac{e^{-\lambda |A|} (\lambda |A|)^n}{n!}
+        \]
+        where \( N(A) \) is the number of points in region \( A \), \( |A| \) is the area of region \( A \), and \( n \)
+        is the number of points in region \( A \). For a bin size of \(\pi r^2\), the intensity \( \lambda \) is given
+        by:
+        \[ \lambda = \frac{(N-1)\pi r^2}{A}\]
+    </p>
+    <p>
+        The probability of finding a point in the annular region \(2\pi r dr\) at a distance \( r \) from a point is
+        given by:
+        \[ f = P(\text{Zero points in } \pi r^2) \cdot P(\text{One point in } 2\pi r dr) \]
+        \[ f = e^{-\pi r^2(n-1)/A}\cdot\frac{2\pi r(n-1)dr}{A} \]
+        But for \(n \rightarrow \infty\), \(n \approx n-1). So we get:
+        \[ f = e^{-\pi r^2n/A}\cdot\frac{2\pi r n dr}{A} \]
+    </p>
+    <p>
+        Thus, the CDF for a Completely Spatially Random point process is given by:
+        \[ G_{CSR}(r) = \int_0^r f = 1 - e^{-\pi r^2 n/A} \]
+    </p>
+
+    <h3 id="spa_auto_corr">Spatial Autocorrelation</h3>
+    <p>
+        In spatial statistics, autocorrelation refers to the correlation between observations at different locations in
+        a spatial dataset. Spatial autocorrelation specifically measures the relationship between the values of a
+        variable at nearby locations.
+    </p>
+
+    <p>
+        Using Dr Hartigan's favourite example, consider a certain amount of soil thrown over the class table. The
+        distribution of soil particles is random, but if you look closely, you will see that the particles are not
+        randomly distributed. There are clusters of particles close to each other, and empty spaces between them. This
+        is an example of spatial autocorrelation. The presence of soil particles at one location is correlated with the
+        presence of soil particles at nearby locations. Studying spatial autocorrelation can help us understand the
+        "typical length scales" of the distribution of soil particles.
+    </p>
+
+    <h4>Measures of Spatial Autocorrelation:</h4>
+
+    <p>
+        Various statistical measures can quantify spatial autocorrelation, including:
+    </p>
+
+    <ul>
+        <li><strong>Moran's I:</strong> Measures the overall spatial autocorrelation in a dataset. It is defined as:
+        </li>
+    </ul>
+
+    \[ I = \frac{1}{W(d)}\frac{\sum_{i=1\neq j}^n \sum_{j=1\neq i}^n w_{ij}(d)(x_i - \bar{x})(x_j -
+    \bar{x})}{\frac{1}{n}\sqrt{\sum_{i=1}^n(x_i - \bar{x})^2}} \]
+    <p>
+        where \( x_i \) is the value of the variable at location \( i \), \( \bar{x} \) is the mean value of the
+        variable, \( w_{ij}(d) \) is a matrix of kernel weights, and \( W(d) \) is the sum of \( w_{ij}(d) \).
+    </p>
+
+    <ul>
+        <li><strong>Geary's C:</strong> Similar to Moran's I but focuses on local spatial autocorrelation.</li>
+    </ul>
+
+    <h4>Variogram:</h4>
+
+    <p>
+        The variogram is a graphical tool used to assess spatial dependence in a dataset. It measures how the variance
+        of a variable changes with distance between points. The variogram function, denoted by \( \gamma(d) \), is
+        calculated as the half of the expected squared difference between the values of the variable at two locations
+        separated by a distance \( d \):
+        \[ \gamma(d) = \frac{1}{2n(d)}\sum_{i=1}^{n(d)}[z(x_i) - z(x_i + d)]^2 \]
+        where \( z(x_i) \) is the value of the variable at location \( x_i \), and \( n(d) \) is the number of pairs of
+        points separated by distance \( d \).
+    </p>
+
+    <h3 id="kriging">Kriging</h3>
+
+    <p>
+        Kriging is a geostatistical interpolation technique used to estimate the value of a spatial variable at
+        unmeasured locations based on values observed at nearby locations.
+    </p>
+
+    <p>
+        Kriging predicts values at unsampled locations by estimating the spatial autocorrelation between sampled
+        locations. It accounts for both the spatial trend and the spatial dependence structure of the variable being
+        modeled.
+    </p>
+
+    <h4>Types of Kriging:</h4>
+
+    <ul>
+        <li><strong>Ordinary Kriging:</strong> Assumes a constant mean value and estimates the spatial autocorrelation
+            using weighted averages of nearby points.</li>
+        <li><strong>Simple Kriging:</strong> Assumes a constant mean value and estimates the spatial autocorrelation
+            using weighted averages of nearby points, with an additional constant term for the nugget effect.</li>
+        <li><strong>Universal Kriging:</strong> Allows for a spatially varying mean value, incorporating a trend surface
+            into the model.</li>
+    </ul>
+
+    <h4>Kriging Process:</h4>
+
+    <ol>
+        <li><strong>Variogram Modeling:</strong> The spatial dependence structure is characterized by modeling the
+            variogram, which describes how the variance of the variable changes with distance.</li>
+        <li><strong>Kriging Estimation:</strong> Using the variogram model, weights are calculated for neighboring
+            sample points to estimate values at unsampled locations.</li>
+        <li><strong>Prediction:</strong> The estimated values are used to predict the variable's values at unsampled
+            locations, often with associated prediction intervals.</li>
+    </ol>
 
     <footer>
         <a href="chapter7.html" style="float: left;">Previous Chapter</a>
         <a href="chapter9.html" style="float: right;">Next Chapter</a>
     </footer>
-    
+
 </body>
+
 </html>

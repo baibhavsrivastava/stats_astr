@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,19 +64,160 @@
     </style>
 
 </head>
-<body> 
-    
+
+<body>
+
     <header>
         <a href="index.html">Back to Index</a>
     </header>
-    
-    <h2>Chapter 10: Truncated Data</h2>
+
+    <h2>Chapter 10: Censored and Truncated Data</h2>
 
     <h3>Table of Contents</h3>
     <ul>
-        <!-- <li><a href="#pca">Principal Component Analysis</a></li> -->
-        <!-- <li><a href="#ica">Independent Component Analysis</a></li> -->
+        <li><a href="#definitions">Basic Definitions</a></li>
+        <li><a href="#kaplan-meier">Kaplan-Meier Estimator</a></li>
+        <li><a href="#cox">Cox Regression</a></li>
+        <li><a href="#lbw">Lynden-Bell and Woodroofe Estimator</a></li>
     </ul>
+
+    <h3 id="definitions">Basic Definitions</h3>
+
+    <h4>Truncation:</h4>
+
+    <p>
+        Truncation occurs when the data are only available for a certain range of values, and observations outside
+        this
+        range are not included in the dataset. Truncation can be left-truncated, right-truncated, or
+        double-truncated
+        depending on whether the observations are missing from the lower, upper, or both ends of the range.
+    </p>
+
+    <h4>Censoring:</h4>
+
+    <p>
+        Censoring refers to the situation where the exact value of a variable of interest is not observed but is
+        known
+        to lie within certain bounds. There are two types of censoring:
+    </p>
+
+    <ul>
+        <li><strong>Right Censoring:</strong> Occurs when the data are only partially observed up to a certain
+            point.
+            The exact value is known to be greater than or equal to a specified threshold.</li>
+        <li><strong>Left Censoring:</strong> Occurs when the data are only partially observed down to a certain
+            point.
+            The exact value is known to be less than or equal to a specified threshold.</li>
+    </ul>
+
+    <h4>Survival Function:</h4>
+
+    <p>
+        The survival function, denoted by \( S(x) \), represents the probability that an object has a value above
+        some
+        specified level. For censored data, \( S(x) \) gives the probability that an object has a value above some
+        specified level \( x \) given that we have observed values up to \( x \). Mathematically:
+        \[ S(x) = P(X > x) = 1 - F(x) \]
+        where \( F(x) \) is the cumulative distribution function (CDF) of the variable \( X \).
+    </p>
+
+    <h4>Hazard Rate:</h4>
+
+    <p>
+        The hazard rate, denoted by \( h(x) \), is the instantaneous rate at which events occur at time \( x \)
+        given
+        that they have not occurred up to that time. It is defined as the ratio of the probability density function
+        (PDF) to the survival function:
+        \[ h(x) = \frac{f(x)}{S(x)} = -\frac{d}{dx} \ln(S(x)) \]
+    </p>
+
+    <h3 id="kaplan-meier">Kaplan-Meier Estimator</h3>
+
+    <p>
+        The Kaplan-Meier estimator is a non-parametric method used to estimate the survival function from censored
+        data.
+    </p>
+
+    <p>
+        Given a set of \( n \) observed survival times \( x_1, x_2, ..., x_n \) with corresponding censoring
+        indicators \( \delta_1, \delta_2, ..., \delta_n \), where \( \delta_i = 1 \) if the event is observed and \(
+        \delta_i = 0 \) if it is censored, the cumulative Hazard function (for left censored data) is defined as:
+        \[\hat{H}_{KM}(x) = \sum_{x_i \geq x} \frac{\delta_i}{n_i} \]
+    </p>
+
+    <p>
+        The ratio \(\delta_i/N_i\) is the conditional probability that an object with value above \(x\) will occur
+        at \(x\). The Kaplan-Meier estimator estimates the survival function \( S(x) \) as follows:
+        \[ \hat{S}_{KM}(x) = \prod_{x_i \geq x} (1 - \frac{\delta_i}{n_i}) \]
+    </p>
+
+    <p>
+        If the censoring is random, the Kaplan-Meier estimator is an unbiased estimator of the true survival
+        function.
+    </p>
+
+    <h3 id="cox">Cox Regression</h3>
+    <p>
+        Cox Regression, also known as Cox Proportional Hazards Model, is a popular semi-parametric method used for
+        analyzing the association between the hazard rate and covariates in survival analysis.
+    </p>
+
+    <p>
+        The Cox model assumes that the hazard ratio is constant over time, but allows for the covariates to have a
+        multiplicative effect on the baseline hazard function.
+    </p>
+
+    <p>
+        The hazard rate has an exponential dependence on the covariates:
+        \[ h(y|x) = h_0(y) \cdot \exp(\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p) \]
+
+        where \( h(y|x) \) is the hazard function at time \( y \) for a subject with covariates \( x_1, x_2, \ldots, x_p
+        \), \( h_0(y) \) is the baseline hazard function, and \( \beta_1, \beta_2, \ldots, \beta_p \) are the regression
+        coefficients corresponding to the covariates.
+    </p>
+
+    </p>
+
+    <h4>Assumptions:</h4>
+
+    <ul>
+        <li><strong>Proportional Hazards Assumption:</strong> The hazard ratio for any two individuals remains
+            constant over time.</li>
+        <li><strong>Independence:</strong> The survival times of different individuals are independent of each
+            other.</li>
+    </ul>
+
+    <p>
+        The coefficients \( \beta_1, \beta_2, ..., \beta_p \) in Cox Regression represent the log hazard ratios
+        associated with each covariate. A positive coefficient indicates an increased "risk" of the event, while a
+        negative coefficient indicates a decreased "risk", holding other variables constant.
+    </p>
+
+    <h3 id="lbw">Lynden-Bell and Woodroofe Estimator</h3>
+
+    <p>
+        The Lynden-Bell and Woodroofe Estimator is a non-parametric method used for estimating the survival function in
+        the case of truncated data.
+    </p>
+
+    <p>
+        The Lynden-Bell and Woodroofe Estimator \( \hat{S}(t) \) is defined as:
+
+        \[ \hat{S} = \prod_{i:x_i \leq x} \left(1 - \frac{\delta_i}{n_i}\right) \] where \( x_i \) are the observed
+        survival times, \( \delta_i \) are the censoring indicators, and \( n_i \) is the number of observations at
+        time \( x_i \). This is very similar to the Kaplan-Meier estimator, but it is adapted to handle truncated
+        data. </p>
+
+    <p>
+        The LBW estimator assumes that the underlying distribution of survival times is known for the entire
+        population, but only a truncated sample is observed. It adjusts for truncation by incorporating
+        information about the truncation point and the distribution of survival times beyond that point. The KM
+        estimator, on the other hand, calculates the survival probabilities based only on the observed survival
+        times and censoring indicators. If there is truncation in the data, the KM estimator may provide biased
+        estimates, especially if the observed sample is not representative of the entire population.
+
+    </p>
+
 
     <footer>
         <a href="chapter9.html" style="float: left;">Previous Chapter</a>
@@ -83,4 +225,5 @@
     </footer>
 
 </body>
+
 </html>
