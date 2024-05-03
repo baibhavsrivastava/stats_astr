@@ -116,13 +116,8 @@
     <p>
         In a simple linear regression with one independent variable \( x \) and one dependent variable \( y \), the
         relationship can be represented as:
-    </p>
+        \[ y = \beta_0 + \beta_1x + \varepsilon \]
 
-    <p style="text-align: center;">
-        \( y = \beta_0 + \beta_1x + \varepsilon \)
-    </p>
-
-    <p>
         where \( \beta_0 \) is the intercept, \( \beta_1 \) is the slope, and \( \varepsilon \) represents the error
         term. The goal is to estimate the coefficients \( \beta_0 \) and \( \beta_1 \) that minimize the Residual
         Sum of Squares (RSS):
@@ -226,10 +221,7 @@
         An obvious choice for the weights is the inverse of the variance of the error term, \( w_i =
         \frac{1}{\sigma_i^2} \).
         The objective is to minimize the weighted sum of squared residuals, given by:
-    </p>
-
-    <p style="text-align: center;">
-        \( \sum_{i=1}^{n} w_i(y_i - \hat{y}_i)^2 = \sum_{i=1}^{n} \frac{1}{\sigma_i^2}(y_i - \beta_0 - \beta_1x_i)^2 \)
+        \[ \sum_{i=1}^{n} w_i(y_i - \hat{y}_i)^2 = \sum_{i=1}^{n} \frac{1}{\sigma_i^2}(y_i - \beta_0 - \beta_1x_i)^2 \]
     </p>
 
     <p>
@@ -268,10 +260,7 @@
     <p>
         In logistic regression, the relationship between the independent variables \( X \) and the probability of the
         dependent variable \( Y \) being in a particular category is modeled using the logistic function:
-    </p>
-
-    <p style="text-align: center;">
-        \( P(Y=1|X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X)}} \)
+        \[ P(Y=1|X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X)}} \]
     </p>
 
     <p>
