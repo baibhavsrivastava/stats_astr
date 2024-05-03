@@ -46,7 +46,7 @@
         }
 
         ul {
-            list-style-type: none;
+            /* list-style-type: none; */
             padding: 10px;
         }
 
@@ -158,6 +158,17 @@
         \[ \gamma(d) = \frac{1}{2n(d)}\sum_{i=1}^{n(d)}[z(x_i) - z(x_i + d)]^2 \]
         where \( z(x_i) \) is the value of the variable at location \( x_i \), and \( n(d) \) is the number of pairs of
         points separated by distance \( d \).
+    </p>
+
+    <p>
+        The variogram is used to model the spatial dependence structure of the variable and is an essential component of
+        kriging. The figure below shows an example of a variogram plot, for completely spatially random data and data with
+        some clumps - some degree of spatial autocorrelation. One can see that the variogram for the completely spatially
+        random data never reaches a plateau, while the variogram for the data with clumps reaches a plateau at a certain
+        distance. This distance is called the range of spatial dependence, and the value at the plateau is called the
+        sill.
+
+        <img src="variogram.png" alt="Variogram Plot" style="width: 100%; display: block; margin: 0 auto;">
     </p>
 
     <h3 id="kriging">Kriging</h3>

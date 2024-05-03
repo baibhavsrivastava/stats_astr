@@ -46,7 +46,7 @@
         }
 
         ul {
-            list-style-type: none;
+            /* list-style-type: none; */
             padding: 10px;
         }
 
@@ -87,263 +87,264 @@
             <li><a href="#tree">Classification Trees</a></li>
             <li><a href="#knn">K-Nearest Neighbors (KNN)</a></li>
         </ul>
+    </ul>
 
-        <h3 id="uc">Unsupervised Clustering</h3>
+    <h3 id="uc">Unsupervised Clustering</h3>
 
-        <h4 id="he">Hierarchical Clustering</h4>
+    <h4 id="he">Hierarchical Clustering</h4>
 
-        <p>
-            Hierarchical clustering is a method used to cluster data into a hierarchy of clusters. It creates a
-            tree-like structure, called a dendrogram, by recursively merging or splitting clusters based on their
-            similarity or dissimilarity. Such clustering algorithms do not rely on any parametric assumptions or prior
-            knowledge of the clustering. The choice of metric, however, can significantly affect the clustering results.
-            These algorithms can be broadly classified into two types: agglomerative and divisive hierarchical
-            clustering.
-        </p>
+    <p>
+        Hierarchical clustering is a method used to cluster data into a hierarchy of clusters. It creates a
+        tree-like structure, called a dendrogram, by recursively merging or splitting clusters based on their
+        similarity or dissimilarity. Such clustering algorithms do not rely on any parametric assumptions or prior
+        knowledge of the clustering. The choice of metric, however, can significantly affect the clustering results.
+        These algorithms can be broadly classified into two types: agglomerative and divisive hierarchical
+        clustering.
+    </p>
 
-        <h5>Agglomerative Hierarchical Clustering:</h5>
+    <h5>Agglomerative Hierarchical Clustering:</h5>
 
-        <p>
-            Agglomerative hierarchical clustering starts by considering each data point as a separate cluster and then
-            iteratively merges the closest clusters until only one cluster remains. The distance between clusters can be
-            measured using various metrics such as Euclidean distance, Manhattan distance, or correlation.
-        </p>
+    <p>
+        Agglomerative hierarchical clustering starts by considering each data point as a separate cluster and then
+        iteratively merges the closest clusters until only one cluster remains. The distance between clusters can be
+        measured using various metrics such as Euclidean distance, Manhattan distance, or correlation.
+    </p>
 
-        <h5>Divisive Hierarchical Clustering:</h5>
+    <h5>Divisive Hierarchical Clustering:</h5>
 
-        <p>
-            Divisive hierarchical clustering starts with all data points in a single cluster and recursively splits them
-            into smaller clusters until each data point is in its cluster. It involves selecting a cluster to split and
-            determining the optimal way to divide it based on some criterion, such as maximizing the distance between
-            resulting clusters.
-        </p>
+    <p>
+        Divisive hierarchical clustering starts with all data points in a single cluster and recursively splits them
+        into smaller clusters until each data point is in its cluster. It involves selecting a cluster to split and
+        determining the optimal way to divide it based on some criterion, such as maximizing the distance between
+        resulting clusters.
+    </p>
 
-        <h5>Linkage Methods:</h5>
+    <h5>Linkage Methods:</h5>
 
-        <p>
-            Hierarchical clustering uses different linkage methods to measure the distance between clusters. Some common
-            linkage methods include:
-        </p>
+    <p>
+        Hierarchical clustering uses different linkage methods to measure the distance between clusters. Some common
+        linkage methods include:
+    </p>
 
-        <ul>
-            <li><strong>Single Linkage:</strong> Measures the shortest distance between two points in different
-                clusters.</li>
-            <li><strong>Complete Linkage:</strong> Measures the longest distance between two points in different
-                clusters.</li>
-            <li><strong>Average Linkage:</strong> Measures the average distance between all pairs of points in different
-                clusters.</li>
-        </ul>
+    <ul>
+        <li><strong>Single Linkage:</strong> Measures the shortest distance between two points in different
+            clusters.</li>
+        <li><strong>Complete Linkage:</strong> Measures the longest distance between two points in different
+            clusters.</li>
+        <li><strong>Average Linkage:</strong> Measures the average distance between all pairs of points in different
+            clusters.</li>
+    </ul>
 
-        <p>
-            The choice of linkage method can significantly impact the clustering results, as different methods may lead
-            to different cluster structures. Single linkage tends to produce elongated clusters, while average linkage
-            tends to produce more spherical clusters.
-        </p>
+    <p>
+        The choice of linkage method can significantly impact the clustering results, as different methods may lead
+        to different cluster structures. Single linkage tends to produce elongated clusters, while average linkage
+        tends to produce more spherical clusters.
+    </p>
 
-        <p>
-            A result of Hierarchical Clustering on four noisy gaussians is shown below:
-            <img src="hierarchical_clustering.png" alt="hierarchical" width="100%">
+    <p>
+        A result of Hierarchical Clustering on four noisy gaussians is shown below:
+        <img src="hierarchical_clustering.png" alt="hierarchical" width="100%">
 
-            One can see how single linkage clustering tends to produce elongated clusters - misclassifying the
-            gaussians, while average linkage clustering tends to produce more spherical clusters - correctly classifying
-            the gaussians upto a great extent.
-        </p>
+        One can see how single linkage clustering tends to produce elongated clusters - misclassifying the
+        gaussians, while average linkage clustering tends to produce more spherical clusters - correctly classifying
+        the gaussians upto a great extent.
+    </p>
 
-        <h4 id="kmc">K-Means Clustering</h4>
+    <h4 id="kmc">K-Means Clustering</h4>
 
-        <p>
-            K-means clustering is a popular unsupervised learning algorithm used to partition a dataset into a
-            pre-defined number of clusters. It aims to minimize the within-cluster sum of squares, which measures the
-            compactness of the clusters.
-        </p>
+    <p>
+        K-means clustering is a popular unsupervised learning algorithm used to partition a dataset into a
+        pre-defined number of clusters. It aims to minimize the within-cluster sum of squares, which measures the
+        compactness of the clusters.
+    </p>
 
-        <h4>Algorithm:</h4>
+    <h4>Algorithm:</h4>
 
-        <ol>
-            <li><strong>Initialization:</strong> Randomly select \( k \) initial cluster centroids.</li>
-            <li><strong>Assignment:</strong> Assign each data point to the nearest cluster centroid based on a distance
-                metric, typically Euclidean distance.</li>
-            <li><strong>Update Centroids:</strong> Update the cluster centroids by computing the mean of all data points
-                assigned to each cluster.</li>
-            <li><strong>Repeat:</strong> Repeat steps 2 and 3 until convergence, i.e., until the cluster assignments no
-                longer change or until a specified number of iterations is reached.</li>
-        </ol>
+    <ol>
+        <li><strong>Initialization:</strong> Randomly select \( k \) initial cluster centroids.</li>
+        <li><strong>Assignment:</strong> Assign each data point to the nearest cluster centroid based on a distance
+            metric, typically Euclidean distance.</li>
+        <li><strong>Update Centroids:</strong> Update the cluster centroids by computing the mean of all data points
+            assigned to each cluster.</li>
+        <li><strong>Repeat:</strong> Repeat steps 2 and 3 until convergence, i.e., until the cluster assignments no
+            longer change or until a specified number of iterations is reached.</li>
+    </ol>
 
-        <p>
-            One of the challenges in K-means clustering is determining the optimal number of clusters, \( k \). Common
-            methods for selecting \( k \) include the elbow method, silhouette score, and gap statistic.
-        </p>
+    <p>
+        One of the challenges in K-means clustering is determining the optimal number of clusters, \( k \). Common
+        methods for selecting \( k \) include the elbow method, silhouette score, and gap statistic.
+    </p>
 
-        <p>
-            K-means is sensitive to the initial choice of centroids, which can lead to different final clusterings.
-            Therefore, it is common to run the algorithm multiple times with different initializations and select the
-            clustering with the lowest within-cluster sum of squares.
-        </p>
+    <p>
+        K-means is sensitive to the initial choice of centroids, which can lead to different final clusterings.
+        Therefore, it is common to run the algorithm multiple times with different initializations and select the
+        clustering with the lowest within-cluster sum of squares.
+    </p>
 
-        <p>
-            A result of K-Means Clustering on four noisy gaussians is shown below:
-            <img src="kmeans_clustering.png" alt="kmeans" width="100%">
+    <p>
+        A result of K-Means Clustering on four noisy gaussians is shown below:
+        <img src="kmeans_clustering.png" alt="kmeans" width="100%">
 
-            The silhouette scores clearly show that the optimal number of clusters is 4, which is the true number of
-            gaussians in the dataset.
-        </p>
+        The silhouette scores clearly show that the optimal number of clusters is 4, which is the true number of
+        gaussians in the dataset.
+    </p>
 
-        <h4 id="dbs">Density-Based Spatial Clustering of Applications with Noise (DBSCAN)</h4>
-        <strong>(Our favourite classifier)</strong>
+    <h4 id="dbs">Density-Based Spatial Clustering of Applications with Noise (DBSCAN)</h4>
+    <strong>(Our favourite classifier)</strong>
 
-        <p>
-            Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a clustering algorithm that groups
-            together closely packed points in high-density regions and marks points in low-density regions as outliers
-            or noise.
-        </p>
+    <p>
+        Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a clustering algorithm that groups
+        together closely packed points in high-density regions and marks points in low-density regions as outliers
+        or noise.
+    </p>
 
-        <h5>Some Definitions:</h5>
+    <h5>Some Definitions:</h5>
 
-        <ul>
-            <li><strong>Core Points:</strong> Points that have at least \( \text{minPts} \) neighboring points within a
-                specified radius \( \varepsilon \).</li>
-            <li><strong>Border Points:</strong> Points that are within the neighborhood of a core point but do not have
-                enough neighbors to be considered core points themselves.</li>
-            <li><strong>Noise Points:</strong> Points that are neither core points nor border points.</li>
-            <li><strong>Reachability:</strong> A point \( p \) is reachable from another point \( q \) if there is a
-                path of core points from \( q \) to \( p \).</li>
-            <li><strong>Directly Density-Reachable:</strong> A point \( p \) is directly density-reachable from \( q \)
-                if \( p \) is within the neighborhood of \( q \) and \( q \) is a core point.</li>
-        </ul>
+    <ul>
+        <li><strong>Core Points:</strong> Points that have at least \( \text{minPts} \) neighboring points within a
+            specified radius \( \varepsilon \).</li>
+        <li><strong>Border Points:</strong> Points that are within the neighborhood of a core point but do not have
+            enough neighbors to be considered core points themselves.</li>
+        <li><strong>Noise Points:</strong> Points that are neither core points nor border points.</li>
+        <li><strong>Reachability:</strong> A point \( p \) is reachable from another point \( q \) if there is a
+            path of core points from \( q \) to \( p \).</li>
+        <li><strong>Directly Density-Reachable:</strong> A point \( p \) is directly density-reachable from \( q \)
+            if \( p \) is within the neighborhood of \( q \) and \( q \) is a core point.</li>
+    </ul>
 
-        <h5>Algorithm:</h5>
+    <h5>Algorithm:</h5>
 
-        <ol>
-            <li><strong>Initialize:</strong> Specify the parameters \( \varepsilon \) (neighborhood radius) and \(
-                \text{minPts} \) (minimum number of points required to form a dense region).</li>
-            <li><strong>Find Core Points:</strong> Identify core points by checking if each point has at least \(
-                \text{minPts} \) neighboring points within \( \varepsilon \).</li>
-            <li><strong>Expand Clusters:</strong> Form clusters by connecting core points that are directly
-                density-reachable and assigning border points to their respective clusters.</li>
-            <li><strong>Label Noise:</strong> Assign noise points that do not belong to any cluster as outliers.</li>
-        </ol>
+    <ol>
+        <li><strong>Initialize:</strong> Specify the parameters \( \varepsilon \) (neighborhood radius) and \(
+            \text{minPts} \) (minimum number of points required to form a dense region).</li>
+        <li><strong>Find Core Points:</strong> Identify core points by checking if each point has at least \(
+            \text{minPts} \) neighboring points within \( \varepsilon \).</li>
+        <li><strong>Expand Clusters:</strong> Form clusters by connecting core points that are directly
+            density-reachable and assigning border points to their respective clusters.</li>
+        <li><strong>Label Noise:</strong> Assign noise points that do not belong to any cluster as outliers.</li>
+    </ol>
 
-        DBSCAN does not require specifying the number of clusters in advance, making it suitable for datasets with
-        varying densities. It also can handle noise and outliers effectively by labeling them as noise points.
+    DBSCAN does not require specifying the number of clusters in advance, making it suitable for datasets with
+    varying densities. It also can handle noise and outliers effectively by labeling them as noise points.
 
-        <p>
-            A result of DBSCAN Clustering on four noisy gaussians is shown below:
-            <img src="dbscan_clustering.png" alt="dbscan" width="100%">
+    <p>
+        A result of DBSCAN Clustering on four noisy gaussians is shown below:
+        <img src="dbscan_clustering.png" alt="dbscan" width="100%">
 
-            As one can see, DBSCAN is able to effectively cluster the gaussians, but the results are very much dependent
-            on the choice of \( \varepsilon \) and \( \text{minPts} \).
-        </p>
+        As one can see, DBSCAN is able to effectively cluster the gaussians, but the results are very much dependent
+        on the choice of \( \varepsilon \) and \( \text{minPts} \).
+    </p>
 
-        <h3 id="sc">Supervised Clustering</h3>
+    <h3 id="sc">Supervised Clustering</h3>
 
-        <h4 id="lda">Linear Discriminant Analysis (LDA)</h4>
+    <h4 id="lda">Linear Discriminant Analysis (LDA)</h4>
 
-        <p>
-            Linear Discriminant Analysis (LDA) is a dimensionality reduction and classification technique that seeks to
-            find the linear combinations of features that best separate different classes in the data. LDA is similar to
-            principal components analysis but with a different purpose: PCA finds linear combinations of the variables
-            that sequentially explain the variance for the sample treated as a whole, while LDA finds combinations that
-            efficiently separate classes within the sample.
-        </p>
+    <p>
+        Linear Discriminant Analysis (LDA) is a dimensionality reduction and classification technique that seeks to
+        find the linear combinations of features that best separate different classes in the data. LDA is similar to
+        principal components analysis but with a different purpose: PCA finds linear combinations of the variables
+        that sequentially explain the variance for the sample treated as a whole, while LDA finds combinations that
+        efficiently separate classes within the sample.
+    </p>
 
-        <p>
-            Given a dataset with \( n \) observations and \( p \) features, where each observation belongs to one of \(
-            k \) classes, LDA aims to find a linear transformation of the feature space that maximizes the separation
-            between classes while minimizing the variance within each class.
-        </p>
+    <p>
+        Given a dataset with \( n \) observations and \( p \) features, where each observation belongs to one of \(
+        k \) classes, LDA aims to find a linear transformation of the feature space that maximizes the separation
+        between classes while minimizing the variance within each class.
+    </p>
 
-        <h5>Procedure:</h5>
+    <h5>Procedure:</h5>
 
-        <ol>
-            <li><strong>Compute Class Means:</strong> Calculate the mean vector for each class.</li>
-            <li><strong>Compute Within-Class Scatter Matrix:</strong> Compute the scatter matrix for each class, which
-                measures the spread of data points within each class.</li>
-            <li><strong>Compute Between-Class Scatter Matrix:</strong> Compute the scatter matrix between classes, which
-                measures the separation between class means.</li>
-            <li><strong>Eigenvalue Decomposition:</strong> Compute the eigenvectors and eigenvalues of the generalized
-                eigenvalue problem \( S_W^{-1}S_B \), where \( S_W \) is the within-class scatter matrix and \( S_B \)
-                is the between-class scatter matrix.</li>
-            <li><strong>Select Components:</strong> Select the \( d \) eigenvectors corresponding to the \( d \) largest
-                eigenvalues to form the projection matrix \( W \).</li>
-            <li><strong>Transform Data:</strong> Project the data onto the subspace spanned by the selected eigenvectors
-                to obtain the lower-dimensional representation.</li>
-        </ol>
+    <ol>
+        <li><strong>Compute Class Means:</strong> Calculate the mean vector for each class.</li>
+        <li><strong>Compute Within-Class Scatter Matrix:</strong> Compute the scatter matrix for each class, which
+            measures the spread of data points within each class.</li>
+        <li><strong>Compute Between-Class Scatter Matrix:</strong> Compute the scatter matrix between classes, which
+            measures the separation between class means.</li>
+        <li><strong>Eigenvalue Decomposition:</strong> Compute the eigenvectors and eigenvalues of the generalized
+            eigenvalue problem \( S_W^{-1}S_B \), where \( S_W \) is the within-class scatter matrix and \( S_B \)
+            is the between-class scatter matrix.</li>
+        <li><strong>Select Components:</strong> Select the \( d \) eigenvectors corresponding to the \( d \) largest
+            eigenvalues to form the projection matrix \( W \).</li>
+        <li><strong>Transform Data:</strong> Project the data onto the subspace spanned by the selected eigenvectors
+            to obtain the lower-dimensional representation.</li>
+    </ol>
 
-        <h4 id="tree">Classification Trees</h4>
+    <h4 id="tree">Classification Trees</h4>
 
-        <p>
-            Classification trees are a type of decision tree used for classification tasks. They recursively partition
-            the feature space into subsets, with each partition corresponding to a decision or rule that classifies the
-            data.
-        </p>
+    <p>
+        Classification trees are a type of decision tree used for classification tasks. They recursively partition
+        the feature space into subsets, with each partition corresponding to a decision or rule that classifies the
+        data.
+    </p>
 
-        <h5>Classification and Regression Trees (CART)</h5>
+    <h5>Classification and Regression Trees (CART)</h5>
 
-        <p>
-            The most common type of classification tree is the Classification and Regression Tree (CART), which uses a
-            binary tree structure to represent the decision rules. At each node of the tree, the algorithm selects the
-            feature that best splits the data into two subsets, based on a criterion such as Gini impurity or
-            information gain.
-        </p>
+    <p>
+        The most common type of classification tree is the Classification and Regression Tree (CART), which uses a
+        binary tree structure to represent the decision rules. At each node of the tree, the algorithm selects the
+        feature that best splits the data into two subsets, based on a criterion such as Gini impurity or
+        information gain.
+    </p>
 
-        <p>
-            CARTs are constructed to minimize the inhomogeneity or impurity along branches. At node
-            \(m\) of a tree, let \(P_j\) be the fraction of objects in the training set with class \(j\). Several
-            measures of impurity are used:
+    <p>
+        CARTs are constructed to minimize the inhomogeneity or impurity along branches. At node
+        \(m\) of a tree, let \(P_j\) be the fraction of objects in the training set with class \(j\). Several
+        measures of impurity are used:
 
-            \[i(m) = \begin{cases}
-            1 - \max(P_j) & \text{Misclassification impurity} \\
-            P_jP_k & \text{Variance impurity} \\
-            -\sum_j P_j \log P_j & \text{Entropy impurity} \\
-            \frac{1}{2}\left[1 - \sum_j P_j^2\right] & \text{Gini impurity}
-            \end{cases}\]
+        \[i(m) = \begin{cases}
+        1 - \max(P_j) & \text{Misclassification impurity} \\
+        P_jP_k & \text{Variance impurity} \\
+        -\sum_j P_j \log P_j & \text{Entropy impurity} \\
+        \frac{1}{2}\left[1 - \sum_j P_j^2\right] & \text{Gini impurity}
+        \end{cases}\]
 
-            At each node, the algorithm selects the feature and split point that minimize the impurity of the resulting
-            child nodes. This process is repeated recursively until a stopping criterion is met, such as a maximum tree
-            depth or minimum number of samples per leaf.
-        </p>
+        At each node, the algorithm selects the feature and split point that minimize the impurity of the resulting
+        child nodes. This process is repeated recursively until a stopping criterion is met, such as a maximum tree
+        depth or minimum number of samples per leaf.
+    </p>
 
-        <h4 id="knn">K-Nearest Neighbors (KNN)</h4>
-        <p>
-            k-Nearest Neighbors (k-NN) is a simple and intuitive classification algorithm that classifies a data point
-            based on the majority class of its nearest neighbors in the feature space.
-        </p>
+    <h4 id="knn">K-Nearest Neighbors (KNN)</h4>
+    <p>
+        k-Nearest Neighbors (k-NN) is a simple and intuitive classification algorithm that classifies a data point
+        based on the majority class of its nearest neighbors in the feature space.
+    </p>
 
-        <h5>Algorithm:</h5>
+    <h5>Algorithm:</h5>
 
-        <ol>
-            <li><strong>Training:</strong> Store all training examples with their corresponding class labels.</li>
-            <li><strong>Prediction:</strong> For a new data point, find the \( k \) nearest neighbors in the training
-                set based on a distance metric (e.g., Euclidean distance).</li>
-            <li><strong>Classification:</strong> Assign the majority class among the \( k \) nearest neighbors as the
-                predicted class for the new data point.</li>
-        </ol>
+    <ol>
+        <li><strong>Training:</strong> Store all training examples with their corresponding class labels.</li>
+        <li><strong>Prediction:</strong> For a new data point, find the \( k \) nearest neighbors in the training
+            set based on a distance metric (e.g., Euclidean distance).</li>
+        <li><strong>Classification:</strong> Assign the majority class among the \( k \) nearest neighbors as the
+            predicted class for the new data point.</li>
+    </ol>
 
-        <p>
-            The key parameter in k-NN is \( k \), the number of nearest neighbors to consider. Larger values of \( k \)
-            lead to smoother decision boundaries but may increase bias, while smaller values of \( k \) may result in
-            more flexible boundaries but could lead to overfitting.
-        </p>
+    <p>
+        The key parameter in k-NN is \( k \), the number of nearest neighbors to consider. Larger values of \( k \)
+        lead to smoother decision boundaries but may increase bias, while smaller values of \( k \) may result in
+        more flexible boundaries but could lead to overfitting.
+    </p>
 
-        <p>
-            Another important aspect of kNN and other distance-based algorithms is the choice of distance metric. The
-            distance metric determines how the similarity between data points is calculated and can significantly impact
-            the algorithm's performance. Some commonly used distance metrics include:
-        </p>
+    <p>
+        Another important aspect of kNN and other distance-based algorithms is the choice of distance metric. The
+        distance metric determines how the similarity between data points is calculated and can significantly impact
+        the algorithm's performance. Some commonly used distance metrics include:
+    </p>
 
-        <ul>
-            <li><strong>Euclidean Distance:</strong> Measures the straight-line distance between two points in Euclidean
-                space.</li>
-            <li><strong>Manhattan Distance:</strong> Measures the sum of the absolute differences between corresponding
-                coordinates of points.</li>
-            <li><strong>Mahalanobis Distance:</strong> Measures the distance between a point and a distribution, taking
-                into account the covariance structure of the data.</li>
-        </ul>
+    <ul>
+        <li><strong>Euclidean Distance:</strong> Measures the straight-line distance between two points in Euclidean
+            space.</li>
+        <li><strong>Manhattan Distance:</strong> Measures the sum of the absolute differences between corresponding
+            coordinates of points.</li>
+        <li><strong>Mahalanobis Distance:</strong> Measures the distance between a point and a distribution, taking
+            into account the covariance structure of the data.</li>
+    </ul>
 
-        <footer>
-            <a href="chapter6.html" style="float: left;">Previous Chapter</a>
-            <a href="chapter8.html" style="float: right;">Next Chapter</a>
-        </footer>
+    <footer>
+        <a href="chapter6.html" style="float: left;">Previous Chapter</a>
+        <a href="chapter8.html" style="float: right;">Next Chapter</a>
+    </footer>
 
 </body>
 

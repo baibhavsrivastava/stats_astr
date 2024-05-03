@@ -46,7 +46,7 @@
         }
 
         ul {
-            list-style-type: none;
+            /* list-style-type: none; */
             padding: 10px;
         }
 
@@ -161,12 +161,24 @@
     <h5>Example - Blind Source Separation</h5>
 
     <p>
-        Consider a scenario where we have a set of mixed signals coming from an unknown number of sources. And lets say we have 
-        some microphones placed in different locations to record these signals. The recorded signals are a linear combination of
-        the original source signals, and the mixing process is unknown. ICA can be used to separate the original sources from
+        Consider a scenario where we have a set of mixed signals coming from an unknown number of sources. And lets say
+        we have
+        some microphones placed in different locations to record these signals. The recorded signals are a linear
+        combination of
+        the original source signals, and the mixing process is unknown. ICA can be used to separate the original sources
+        from
         the mixed signals without knowing the mixing matrix.
     </p>
 
+    <p>
+        The figure below shows an example of blind source separation (BSS) using ICA. This is a cocktail party problem
+        where we have three microphones recording the mixed signals from three different sources. ICA can be used to
+        separate the original sources from the mixed signals. Things might be complicated when the number of sources is
+        unknown or when the sources are not statistically independent. Moreover, if there are lesser microphones than
+        sources, the problem becomes underdetermined and requires additional constraints to solve. The easiest way to
+        solve this problem is to perform PCA first to reduce the dimensionality and then apply ICA to separate the
+        sources.
+        <img src="bss.png" alt="bss" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
 
     <footer>
         <a href="chapter4.html" style="float: left;">Previous Chapter</a>
