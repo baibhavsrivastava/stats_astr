@@ -46,10 +46,10 @@
             font-style: italic;
         }
 
-        ul {
-            /* list-style-type: none; */
+        /* ul {
+            list-style-type: none;
             padding: 10px;
-        }
+        } */
 
         li {
             margin-bottom: 10px;
@@ -92,24 +92,19 @@
     <h3 id="ks-statistic">Kolmogorov-Smirnov (KS) Statistic and Test</h3>
 
     <p>
-        The Kolmogorov-Smirnov (KS) statistic and its associated test are fundamental tools in non-parametric statistics
-        for comparing two probability distributions. It uses the ordered sample to construct an upper and lower step
-        function such that the underlying distribution is bounded between these two functions.
-        The KS test builds on the idea that the distribution of \(\sup_{x} |F(x) - S_n(x)|\) does not depend on \(F\)
-        when \(F\) is continuous. Here \(F\) is the true distribution function and \(S_n\) is the empirical distribution
-        function.
-
-        In the context of physics and astronomy, the KS test is
-        particularly useful for assessing whether two samples come from the same underlying distribution, without making
-        assumptions about the specific form of that distribution.
+        The Kolmogorov-Smirnov (KS) statistic and its associated test are used for comparing two probability
+        distributions. It uses the ordered sample to construct an upper and lower step function such that the underlying
+        distribution is bounded between these two functions. The KS test builds on the idea that the distribution of
+        \(\sup_{x} |F(x) - S_n(x)|\) does not depend on \(F\) when \(F\) is continuous. Here \(F\) is the true
+        distribution function and \(S_n\) is the empirical distribution function. Thus, the KS test is particularly
+        useful for assessing whether two samples come from the same underlying distribution, without making assumptions
+        about the specific form of that distribution.
     </p>
 
     <h4>Kolmogorov-Smirnov Statistic:</h4>
 
     <p>
-        The KS statistic, denoted as \(D\), measures the maximum discrepancy between the empirical cumulative
-        distribution
-        functions (CDFs) of two samples. Mathematically, it is defined as:
+        The KS statistic, denoted as \(D\), measures the maximum discrepancy between the empirical cumulative distribution functions (CDFs) of two samples. Mathematically, it is defined as:
     </p>
 
     <p style="text-align: center;">
@@ -159,19 +154,11 @@
                     likely come from different distributions.</li>
             </ol>
 
-            <p><strong>Interpretation:</strong></p>
             <p>If the null hypothesis is rejected, it suggests that there are significant differences between the
                 observed and
                 theoretical distributions of stellar magnitudes in the given region of the sky. This could indicate
                 discrepancies between the actual stellar population and the assumptions made in the theoretical model.
             </p>
-
-            <p><strong>Conclusion:</strong></p>
-            <p>The KS test provides a powerful tool for comparing distributions in astronomy, allowing researchers to
-                validate
-                theoretical models against observational data and gain insights into the nature of celestial objects.
-            </p>
-
 
         </div>
         <div style="flex: 1;">
@@ -188,14 +175,14 @@
         One must note that median is a much more robust measure of central tendency than the mean, and is less affected
         by
         outliers or skewed data. The Wilcoxon test is particularly useful for situations where the data may not follow a
-        normal distribution or when sample sizes are small.
+        normal distribution or when sample sizes are small. Thus, the Wilcoxon Sum of Ranks test provides a robust alternative to parametric tests when data does not meet the
+        assumptions of normality or when sample sizes are small.
     </p>
 
     <h4>Procedure:</h4>
 
     <ol>
         <li>Calculate the differences between paired observations.</li>
-        <li>Discard the pairs with a difference of zero.</li>
         <li>Rank the absolute values of the differences, starting from the smallest (ties are given the average of the
             ranks they would occupy).</li>
         <li>Sum the ranks of the positive or negative differences, depending on the direction of the hypothesis.</li>
@@ -222,24 +209,9 @@
             stars.</li>
     </ul>
 
-    <p><strong>Procedure:</strong></p>
-    <ol>
-        <li>Calculate the differences in luminosity between each white dwarf and main-sequence star pair.</li>
-        <li>Discard pairs where the difference is zero.</li>
-        <li>Rank the absolute differences and sum the ranks of the positive or negative differences, depending on the
-            direction of the hypothesis.</li>
-        <li>Use the sum of ranks to determine the significance level.</li>
-    </ol>
-
-    <p><strong>Interpretation:</strong></p>
     <p>If the null hypothesis is rejected, it suggests that there is a significant difference in the median luminosity
         between white dwarfs and main-sequence stars. This could indicate fundamental differences in their evolutionary
         paths or physical properties.</p>
-
-    <p><strong>Conclusion:</strong></p>
-    <p>The Wilcoxon Sum of Ranks test provides a robust alternative to parametric tests when data does not meet the
-        assumptions of normality or when sample sizes are small. </p>
-
 
     <h3 id="spearman">Spearman Rank Correlation Test</h3>
 
@@ -266,11 +238,6 @@
 
     <h4>Example:</h4>
 
-    <p>
-        In astronomy, the Spearman rank correlation test can be applied to investigate the relationship between the
-        luminosity and temperature of stars in a particular region of the sky.
-    </p>
-
     <p><strong>Scenario:</strong> Suppose we have a dataset containing the luminosity and temperature measurements of a
         sample of stars.</p>
 
@@ -280,28 +247,15 @@
         <li>\( H_1 \): There is a monotonic relationship between the luminosity and temperature of stars.</li>
     </ul>
 
-    <p><strong>Procedure:</strong></p>
-    <ol>
-        <li>Rank the luminosity and temperature values separately.</li>
-        <li>Calculate the differences between the ranks of corresponding pairs.</li>
-        <li>Compute the Spearman's rank correlation coefficient \( \rho \).</li>
-        <li>Interpret the value of \( \rho \) to determine the strength and direction of the correlation.</li>
-    </ol>
-
-    <p><strong>Interpretation:</strong></p>
     <p>A positive value of \( \rho \) indicates a positive monotonic relationship, meaning that as one variable
         increases, the other tends to increase as well. Conversely, a negative value of \( \rho \) indicates a negative
         monotonic relationship.</p>
-
-    <p><strong>Conclusion:</strong></p>
-    <p>The Spearman rank correlation test is a versatile tool for assessing relationships between variables in physics
-        and astronomy, providing insights into the underlying structure of observational data.</p>
 
     <h3 id="others">Other Important Non-parametric Tests</h3>
 
     <p>
         In addition to the Kolmogorov-Smirnov test, Wilcoxon signed-rank test, and Spearman rank correlation test, there
-        are several other important non-parametric tests commonly used in physics and astronomy for various analytical
+        are several other important non-parametric tests commonly used for various analytical
         purposes.
     </p>
 
@@ -310,7 +264,9 @@
     <p>
         The Anderson-Darling test is used to assess whether a sample comes from a specific distribution, such as the
         normal distribution. It provides a more sensitive test than the Kolmogorov-Smirnov test for detecting deviations
-        from the hypothesized distribution.
+        from the hypothesized distribution. Since the KS test deals with CDFs, it is more sensitive to differences in the
+        tails of the distribution, Anderson-Darling uses weighted differences in the tails to provide a more sensitive
+        estimate of the differences.
     </p>
 
     <h4>Kendall's Tau Test</h4>

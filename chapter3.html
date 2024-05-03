@@ -45,10 +45,10 @@
             font-style: italic;
         }
 
-        ul {
-            /* list-style-type: none; */
+        /* ul {
+            list-style-type: none;
             padding: 10px;
-        }
+        } */
 
         li {
             margin-bottom: 10px;
@@ -142,8 +142,8 @@
     </p>
 
     <p>
-        When the true variance of the error term \( \varepsilon \) is known (which is often the case), the OLS
-        are not unbiased. The confidence intervals for \(Y\) at a specific value of \(X\) is then given by
+        When the true variance of the error term \( \varepsilon \) is unknown (which is often the case), the OLS
+        estimates are not unbiased. The confidence intervals for \(Y\) at a specific value of \(X\) is then given by
 
         \[ \hat{Y}(x) = \hat{\beta}_0 + \hat{\beta}_1x \pm t_{\alpha/2, n-2} S \sqrt{1 + \frac{1}{n} \frac{(x -
         \bar{x})^2}{\sum_{i=1}^{n} (x_i - \bar{x})^2}} \]
@@ -169,7 +169,7 @@
     </p>
 
     <p>
-        A demonstration of the Central Limit Theorem can be found <a
+        A demonstration of Ordinary Least Sqaures can be found <a
             href="https://seeing-theory.brown.edu/regression-analysis/index.html#section1">here</a>.
     </p>
 
@@ -216,7 +216,7 @@
 
     <p>
         Weighted Least Squares (WLS) is a regression technique that accounts for heteroscedasticity, where the variance
-        of the errors may not be constant across observations. In physics and astronomy, WLS is particularly useful when
+        of the errors may not be constant across observations. WLS is particularly useful when
         the variability in the data is not uniform and different observations have different levels of precision or
         uncertainty.
     </p>
@@ -252,7 +252,7 @@
         <img src="ols_vs_wls.png" style="width: 50%;" alt="heteroscedasticity">
     </div>
     It is evident that OLS is biased in the presence of heteroscedasticity, while WLS provides more accurate
-    estimates of the regression coefficients. Note that oth OLS and WLS provide similar estimates in the case of
+    estimates of the regression coefficients. Note that both OLS and WLS provide similar estimates in the case of
     homoscedasticity.
     </p>
 

@@ -45,10 +45,10 @@
             font-style: italic;
         }
 
-        ul {
-            /* list-style-type: none; */
+        /* ul {
+            list-style-type: none;
             padding: 10px;
-        }
+        } */
 
         li {
             margin-bottom: 10px;
@@ -88,26 +88,24 @@
         Poisson distribution with a constant intensity \( \lambda \).
     </p>
     <p>
-        The probability of finding \( n \) points in a region \( A \) is given by the Poisson distribution:
+        The probability of finding \( n \) points in a region of area \( A \) is given by the Poisson distribution:
         \[
-        P(N(A) = n) = \frac{e^{-\lambda |A|} (\lambda |A|)^n}{n!}
+        P(N(A) = n) = \frac{e^{-\lambda A} (\lambda A)^n}{n!}
         \]
-        where \( N(A) \) is the number of points in region \( A \), \( |A| \) is the area of region \( A \), and \( n \)
-        is the number of points in region \( A \). For a bin size of \(\pi r^2\), the intensity \( \lambda \) is given
-        by:
+        For a bin size of \(\pi r^2\), the intensity \( \lambda \) is given by:
         \[ \lambda = \frac{(N-1)\pi r^2}{A}\]
     </p>
     <p>
         The probability of finding a point in the annular region \(2\pi r dr\) at a distance \( r \) from a point is
         given by:
-        \[ f = P(\text{Zero points in } \pi r^2) \cdot P(\text{One point in } 2\pi r dr) \]
-        \[ f = e^{-\pi r^2(n-1)/A}\cdot\frac{2\pi r(n-1)dr}{A} \]
+        \[ p = P(\text{Zero points in } \pi r^2) \cdot P(\text{One point in } 2\pi r dr) \]
+        \[ p = e^{-\pi r^2(n-1)/A}\cdot\frac{2\pi r(n-1)dr}{A} \]
         But for \(n \rightarrow \infty\), \(n \approx n-1). So we get:
-        \[ f = e^{-\pi r^2n/A}\cdot\frac{2\pi r n dr}{A} \]
+        \[ p = e^{-\pi r^2n/A}\cdot\frac{2\pi r n dr}{A} \]
     </p>
     <p>
         Thus, the CDF for a Completely Spatially Random point process is given by:
-        \[ G_{CSR}(r) = \int_0^r f = 1 - e^{-\pi r^2 n/A} \]
+        \[ G_{CSR}(r) = \int_0^r p = 1 - e^{-\pi r^2 n/A} \]
     </p>
 
     <h3 id="spa_auto_corr">Spatial Autocorrelation</h3>
@@ -162,11 +160,11 @@
 
     <p>
         The variogram is used to model the spatial dependence structure of the variable and is an essential component of
-        kriging. The figure below shows an example of a variogram plot, for completely spatially random data and data with
-        some clumps - some degree of spatial autocorrelation. One can see that the variogram for the completely spatially
-        random data never reaches a plateau, while the variogram for the data with clumps reaches a plateau at a certain
-        distance. This distance is called the range of spatial dependence, and the value at the plateau is called the
-        sill.
+        kriging. The figure below shows an example of a variogram plot, for completely spatially random data and for
+        data with some clumps - some degree of spatial autocorrelation. One can see that the variogram for the
+        completely spatially random data never reaches a plateau, while the variogram for the data with clumps reaches a
+        plateau at a certain distance. This distance is called the range of spatial dependence, and the value at the
+        plateau is called the sill.
 
         <img src="variogram.png" alt="Variogram Plot" style="width: 100%; display: block; margin: 0 auto;">
     </p>
@@ -174,7 +172,7 @@
     <h3 id="kriging">Kriging</h3>
 
     <p>
-        Kriging is a geostatistical interpolation technique used to estimate the value of a spatial variable at
+        Kriging is an interpolation technique used to estimate the value of a spatial variable at
         unmeasured locations based on values observed at nearby locations.
     </p>
 
@@ -195,7 +193,7 @@
             into the model.</li>
     </ul>
 
-    <h4>Kriging Process:</h4>
+    <h4>Steps Involved in Kriging:</h4>
 
     <ol>
         <li><strong>Variogram Modeling:</strong> The spatial dependence structure is characterized by modeling the
@@ -203,7 +201,7 @@
         <li><strong>Kriging Estimation:</strong> Using the variogram model, weights are calculated for neighboring
             sample points to estimate values at unsampled locations.</li>
         <li><strong>Prediction:</strong> The estimated values are used to predict the variable's values at unsampled
-            locations, often with associated prediction intervals.</li>
+            locations.</li>
     </ol>
 
     <footer>

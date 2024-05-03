@@ -45,10 +45,10 @@
             font-style: italic;
         }
 
-        ul {
-            /* list-style-type: none; */
+        /* ul {
+            list-style-type: none;
             padding: 10px;
-        }
+        } */
 
         li {
             margin-bottom: 10px;
@@ -107,7 +107,7 @@
     <p>
         Agglomerative hierarchical clustering starts by considering each data point as a separate cluster and then
         iteratively merges the closest clusters until only one cluster remains. The distance between clusters can be
-        measured using various metrics such as Euclidean distance, Manhattan distance, or correlation.
+        measured using various metrics such as Euclidean distance, Manhattan distance, etc.
     </p>
 
     <h5>Divisive Hierarchical Clustering:</h5>
@@ -172,7 +172,7 @@
 
     <p>
         One of the challenges in K-means clustering is determining the optimal number of clusters, \( k \). Common
-        methods for selecting \( k \) include the elbow method, silhouette score, and gap statistic.
+        methods for selecting \( k \) include the elbow method or silhouette score.
     </p>
 
     <p>
@@ -190,7 +190,7 @@
     </p>
 
     <h4 id="dbs">Density-Based Spatial Clustering of Applications with Noise (DBSCAN)</h4>
-    <strong>(Our favourite classifier)</strong>
+    <strong><em>(Our favourite classifier!)</em></strong>
 
     <p>
         Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a clustering algorithm that groups
@@ -253,7 +253,7 @@
         between classes while minimizing the variance within each class.
     </p>
 
-    <h5>Procedure:</h5>
+    <!-- <h5>Procedure:</h5>
 
     <ol>
         <li><strong>Compute Class Means:</strong> Calculate the mean vector for each class.</li>
@@ -268,7 +268,7 @@
             eigenvalues to form the projection matrix \( W \).</li>
         <li><strong>Transform Data:</strong> Project the data onto the subspace spanned by the selected eigenvectors
             to obtain the lower-dimensional representation.</li>
-    </ol>
+    </ol> -->
 
     <h4 id="tree">Classification Trees</h4>
 
@@ -306,8 +306,8 @@
 
     <h4 id="knn">K-Nearest Neighbors (KNN)</h4>
     <p>
-        k-Nearest Neighbors (k-NN) is a simple and intuitive classification algorithm that classifies a data point
-        based on the majority class of its nearest neighbors in the feature space.
+        k-Nearest Neighbors (k-NN) classifies a data point based on the majority class of its nearest neighbors in the
+        feature space.
     </p>
 
     <h5>Algorithm:</h5>
@@ -337,8 +337,8 @@
             space.</li>
         <li><strong>Manhattan Distance:</strong> Measures the sum of the absolute differences between corresponding
             coordinates of points.</li>
-        <li><strong>Mahalanobis Distance:</strong> Measures the distance between a point and a distribution, taking
-            into account the covariance structure of the data.</li>
+        <li><strong>Mahalanobis Distance:</strong> Measures the distance between two points, scaled by the
+            covariance matrix of the data.</li>
     </ul>
 
     <footer>

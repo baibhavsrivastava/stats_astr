@@ -45,10 +45,10 @@
             font-style: italic;
         }
 
-        ul {
-            /* list-style-type: none; */
+        /* ul {
+            list-style-type: none;
             padding: 10px;
-        }
+        } */
 
         li {
             margin-bottom: 10px;
@@ -73,29 +73,24 @@
 
     <h2>Chapter 6: Bayesian Statistics</h2>
 
-    <p>Bayesian statistics is a theory in the field of statistics based on the Bayesian interpretation of probability
-        where probability expresses a degree of belief in an event. The degree of belief may change as new evidence is
-        presented. Bayesian statistics is a mathematical procedure that applies probabilities to statistical problems.
-        It provides a set of tools for representing uncertainty about quantities of interest, deriving inferences from
-        data, and quantifying the strength of evidence. In simplest terms, Bayesian statistics is a way to use
-        "whatever" information is available to make inferences about unknown quantities of interest.
+    <p>
+        Bayesian statistics is based on the Bayesian interpretation of probability where probability expresses a degree
+        of belief in an event. The degree of belief may change as new evidence is presented. It provides a set of tools
+        for representing uncertainty about quantities of interest, deriving inferences from data, and quantifying the
+        strength of evidence. In simplest terms, Bayesian statistics is a way to use "whatever" information is available
+        to make inferences about unknown quantities of interest.
     </p>
 
     <p>
-        Consider two events A and B. The probability of event A given that event B has occurred is denoted as P(A|B).
-        This
-        is called the conditional probability of A given B. The conditional probability of A given B is defined as:
-        \[ P(A|B) = \frac{P(A \cap B)}{P(B)} \]
-        where P(A ∩ B) is the probability of both A and B occurring, and P(B) is the probability of event B occurring.
+        Consider two events A and B. The probability of event A given that event B has occurred is denoted as P(A|B). This is called the conditional probability of A given B. The conditional probability of A given B is defined as:
+        \[ P(A|B) = \frac{P(B|A)P(A)}{P(B)} \]
     </p>
 
     <p>
-        In context of Bayesian statistics, P(A|B) is the posterior probability of event A given event B, P(A) is the
-        prior probability of event A, and P(B|A) is the likelihood of event B given event A. The posterior probability
-        is the probability of event A given event B has occurred. The prior probability is the probability of event A
-        before event B has occurred. The likelihood is the probability of event B given event A has occurred. Here, one
-        can treat A as some model parameters and B as the observed data. We are interested in finding the posterior
-        probability of the model parameters given the observed data.
+        In the context of Bayesian statistics, one can treat A as the model parameters, and B as the observed data. The
+        conditional probability P(A|B) is the posterior probability of the model parameters given the data. The
+        posterior probability is updated based on the likelihood of the data given the model parameters, P(B|A), the
+        prior probability of the model parameters, P(A), and the marginal likelihood of the data, P(B).
     </p>
 
     <h3>Example</h3>
@@ -125,7 +120,7 @@
     of the ball coming from Bowl 1 increases. This is the essence of Bayesian statistics - updating beliefs based on
     new evidence.
 
-    <h4>The Monty Hall Problem</h4>
+    <h3>The Monty Hall Problem</h3>
     A demonstration of Bayesian statistics in action is the Monty Hall problem. The Monty Hall problem is a
     probability puzzle based on a game show scenario. The problem is named after Monty Hall, the host of the
     television game show "Let's Make a Deal." The problem is as follows:
@@ -160,7 +155,8 @@
         or an exponential prior. The choice of prior can significantly influence the posterior distribution and the
         expected value of the model parameters.
 
-        <img src="bayesian_statistics.png" alt="bayesian_statistics" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+        <img src="bayesian_statistics.png" alt="bayesian_statistics"
+            style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
     </p>
 
     <footer>

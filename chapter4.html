@@ -45,10 +45,10 @@
             font-style: italic;
         }
 
-        ul {
-            /* list-style-type: none; */
+        /* ul {
+            list-style-type: none;
             padding: 10px;
-        }
+        } */
 
         li {
             margin-bottom: 10px;
@@ -85,6 +85,7 @@
         <li><a href="#uneven">Unevenly Spaced Data</a></li>
         <ul>
             <li><a href="#lomb-scargle">Lomb-Scargle Periodogram</a></li>
+            <li><a href="#wavelet">Wavelet Analysis</a></li>
             <!-- <li><a href="#robust">Robust Regression</a></li> -->
             <!-- <li><a href="#weight-ls">Weighted Least Squares</a></li> -->
             <!-- <li><a href="#logistic">Logistic Regression</a></li> -->
@@ -138,11 +139,12 @@
     </div>
 
     One can clearly see the sinusoidal pattern in the time series data, and the corresponding peaks in the ACF plot
-    at about a period of 4. Note that if you just had the data points (the noisy points), it would be very difficult to
+    at about a period of 4. Note that if you just had the data points (the noisy blue points in the top left plot), it
+    would be very difficult to
     visually guess the periodicity in the data. The ACF plot helps in identifying the periodicity in the data. The Lag-k
     scatter plot also shows the correlation between the time series and its lagged version at different lags, showing
     strong correlation at lag 4 and its multiples. The negative peaks at 2 and 6 show the half-period effect of the
-    sinusoidal pattern.
+    sinusoidal pattern, something which is also seen as negative correlation in the Lag-k scatter plot.
 
     <h4 id="pacf">Partial Autocorrelation Function</h4>
     <p>
@@ -314,9 +316,9 @@
     </p>
 
     <p>
-        Wavelet analysis decomposes a time series into its time-frequency components using wavelet functions, which
-        are mathematical functions that oscillate at different frequencies and are localized in both time and
-        frequency domains. The wavelet transform of \(X_i\) at scale \(s\) and time \(t\) is given by:
+        Wavelet analysis decomposes a time series into its time-frequency components using wavelet functions, that
+        oscillate at different frequencies and are localized in both time and frequency domains. The wavelet transform
+        of \(X_i\) at scale \(s\) and time \(t\) is given by:
 
         \[ W(s, t) = \frac{1}{\sqrt{s}} \int_{-\infty}^{\infty} X_i g\left(\frac{t - t'}{s}\right) \, dt' \]
 

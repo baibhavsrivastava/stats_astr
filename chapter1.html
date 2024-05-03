@@ -45,10 +45,10 @@
             font-style: italic;
         }
 
-        ul {
-            /* list-style-type: none; */
+        /* ul {
+            list-style-type: none;
             padding: 10px;
-        }
+        } */
 
         li {
             margin-bottom: 10px;
@@ -90,7 +90,7 @@
         <li> <strong> <em>Sample Space </em> (\(S\)) </strong> : Set of all possible outcomes of an experiment.
         </li>
         <li> <strong> <em>Event </em> (\(E\)) </strong> : Subset of the sample space. </li>
-        <li> <strong> <em> Random Variable </em> (\(X\))</strong> : A function that assigns a real number to each
+        <li> <strong> <em> Random Variable </em> (\(X\))</strong> : A map that assigns a real number to each
             outcome in the sample space, i.e. \( X: S \rightarrow \mathcal{R} \) </li>
         <li> <strong> <em> Probability Distribution Function </em> </strong> : A function that assigns a probability
             to each possible value of the random variable.
@@ -143,7 +143,8 @@
     <h5> Why is the Poisson Distribution interesting? </h5>
     <ol>
         <li> It is a limit of the binomial distribution for large \( n \) and small \( p \). </li>
-        <li> It represents the number of arrivals in a fixed interval of time. </li>
+        <li> It represents the number of arrivals in a fixed interval of time, hence can be used to model photon
+            counts, radioactive decay, etc. </li>
     </ol>
 
     <h4> Continuous Distributions </h4>
@@ -194,7 +195,7 @@
 
                 <p>If \(\bar{x}\) and \(s^2\) are the mean and variance of a random sample of size \(n\) from a nomral
                     population with mean \(\mu\) and variance \(\sigma^2\) then \(\frac{\bar{x} - \mu}{s/\sqrt{n}}\)
-                    follows a t-distribution with \(n-1)\ degrees of freedom</p>
+                    follows a t-distribution with \((n-1)\) degrees of freedom</p>
         </li>
     </ul>
 
@@ -208,7 +209,7 @@
         \mu}{\sigma/\sqrt{n}} \) will look like a standard normal distribution, once \(n\) gets large enough. </p>
     <p>This can also be thought of in terms of the signal-to-noise ratio. The signal is the mean of the random
         variables and the noise is the variance, i.e. \(SNR = \frac{\bar{X}}{\sigma}\sqrt{n}\). As the number of
-        random variables increases, the signal-to-noise ratio increases and the distribution of the sample mean
+        samples increases, the signal-to-noise ratio increases and the distribution of the sample mean
         becomes more and more peaked around the true mean.</p>
 
     A demonstration of the Central Limit Theorem can be found <a
@@ -250,13 +251,14 @@
         href="https://seeing-theory.brown.edu/frequentist-inference/index.html#section2">here</a>.
 
     <h3 id="hypothesis-testing">Hypothesis Testing</h3>
-    <p>Hypothesis testing is a method of making decisions based on data. The process involves setting up two
-        competing
-        hypotheses, the null hypothesis \( H_0 \) and the alternative hypothesis \( H_1 \). The null
-        hypothesis is the
-        hypothesis that there is no effect or no difference, while the alternative hypothesis is the
-        hypothesis that
-        there is an effect or a difference.</p>
+    <p>
+        Hypothesis testing is a method of making decisions based on data. The process involves setting up two competing
+        hypotheses, the null hypothesis \( H_0 \) and the alternative hypothesis \( H_1 \). The null hypothesis is the
+        hypothesis that there is no effect or no difference, while the alternative hypothesis is the hypothesis that
+        there is an effect or a difference due to the treatment or intervention. The goal of hypothesis testing is to
+        determine whether the data provide enough evidence to reject the null hypothesis in favor of the alternative
+        hypothesis.
+    </p>
     <p>The process of hypothesis testing involves calculating a test statistic from the data and comparing
         it to a
         critical value. If the test statistic is greater than the critical value, then the null hypothesis
@@ -284,7 +286,7 @@
     Ideally, we would like to have several samples from the same population and calculate the parameter for each
     sample. This would give us an idea of the variability of the parameter estimate, and biases if any. However, in
     practice, we usually have only one sample. Resampling methods are a way to estimate the variability of the
-    parameter estimate from a single sample. They also allow for bias estimation. 
+    parameter estimate from a single sample. They also allow for bias estimation.
 
     <h4>Jackknife</h4>
     The basic idea of the jackknife is to estimate the bias in a parameter estimate by leaving out one observation at a
@@ -293,11 +295,12 @@
     estimates, each with \( n - 1 \) observations. The bias is then estimated as
     \[ \text{bias}_{\text{J}} = \frac{1}{n}\sum_{i = 1}^{n}[n\hat{\theta} - (n - 1)\hat{\theta}_{(i)}] \]
     where \( \hat{\theta} \) is the parameter estimate from the full sample and \( \hat{\theta}_{(i)} \) is the
-    parameter estimate from the sample with the \( i \)th observation left out. 
+    parameter estimate from the sample with the \( i \)th observation left out.
 
     <h5>Example</h5>
     Consider a population \(\Sigma\) that is a uniform distribution on the interval \([0, a]\), where \(a\) is unknown.
-    We take a sample of size \(n\) from this population and estimate the maximum value of the population. The best estimate
+    We take a sample of size \(n\) from this population and estimate the maximum value of the population. The best
+    estimate
     of the maximum value is the maximum value of the sample
     \[ \hat{\theta} = \max\{X_i\} = X_\max \]
     where \(X_i\) are the observations in the sample. Note that this is a biased estimate of the maximum value of the
@@ -305,22 +308,26 @@
     \[ \hat{\theta}_{(i)} = \max\{X_j : j \neq i\} = X_{\max-1} \quad\text{(The second highest value)} \]
     The corrected jackknife estimate of the maximum value is then
     \[ \hat{\theta}_{\text{J}} = \hat{\theta} - \text{bias}_{\text{J}} = X_\max + \frac{n-1}{n}(X_\max - X_{\max-1}) \]
-    Jackknife thus uses not only the maximum value but also the second highest value to estimate the maximum value of the
-    population. It is important to note that the jackknife reduces the bias, but does not eliminate it completely. Jackknife
+    Jackknife thus uses not only the maximum value but also the second highest value to estimate the maximum value of
+    the
+    population. It is important to note that the jackknife reduces the bias, but does not eliminate it completely.
+    Jackknife
     can fix biases of \(O(1/n)\), but not of higher orders.
 
     <h4>Bootstrap</h4>
-    Sample standard errors is often not a good estimate of the confidence interval of the population parameter. Small 
+    Sample standard errors is often not a good estimate of the confidence interval of the population parameter. Small
     sample sizes and non-normality of the data can lead to incorrect confidence intervals. The bootstrap method is a
     resampling method that estimates the variability of the parameter estimate by resampling the data with replacement.
-    The basic idea is to create a large number of bootstrap samples by sampling with replacement from the original sample.
-    The parameter estimate is then calculated for each bootstrap sample, and the variability of the parameter estimate is
+    The basic idea is to create a large number of bootstrap samples by sampling with replacement from the original
+    sample.
+    The parameter estimate is then calculated for each bootstrap sample, and the variability of the parameter estimate
+    is
     estimated from the distribution of the bootstrap estimates. A sample of size \(n\) will have \(n^n\) possible
     bootstrap samples. The best part of the bootstrap method is that is does not make any assumptions about the
     the error intervals.
     <br>
     A demonstration of bootstrap can be found <a
-    href="https://seeing-theory.brown.edu/frequentist-inference/index.html#section3">here</a>.
+        href="https://seeing-theory.brown.edu/frequentist-inference/index.html#section3">here</a>.
 
     <footer>
         <a href="index.html" style="float: left;">Back to Index</a>
