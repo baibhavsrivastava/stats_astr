@@ -8,28 +8,76 @@
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: sans-serif, serif, monospace;
+            margin: 20px;
+        }
+
+        header,
+        footer {
+            background-color: #ffffff;
+            /* padding: 5px; */
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        h1 {
+            color: #000000;
+            font-size: 2.5em;
+            text-decoration: underline double;
+        }
+
+        h2 {
+            color: #000000;
+            font-size: 2em;
+            text-decoration: underline double;
+        }
+
+        h3 {
+            color: #000000;
+            font-size: 1.5em;
+            text-decoration: underline;
+        }
+
+        h4 {
+            color: #000000;
+            font-size: 1.2em;
+        }
+
+        h5 {
+            color: #000000;
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        /* ul {
+            list-style-type: none;
+            padding: 10px;
+        } */
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        em {
+            color: #333;
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <h1>Statistics for Physics and Astronomy</h1>
-        <h2> A Short Summary </h2>
+        <h3> A Short Summary </h3>
         <em>Baibhav Srivastava</em>
     </header>
-    <nav>
-        <ul>
-            <li><a href="chapter1.html">Chapter 1: Introductory Probability Theory</a></li>
-            <li><a href="chapter2.html">Chapter 2: Nonparametric Statistics</a></li>
-            <li><a href="chapter3.html">Chapter 3: Regression</a></li>
-            <li><a href="chapter4.html">Chapter 4: Time Series Analysis</a></li>
-            <li><a href="chapter5.html">Chapter 5: Multivariate Statistics</a></li>
-            <li><a href="chapter6.html">Chapter 6: Bayesian Statistics</a></li>
-            <li><a href="chapter7.html">Chapter 7: Data Clustering and Classification</a></li>
-            <li><a href="chapter8.html">Chapter 8: Spatial Point Processes</a></li>
-            <li><a href="chapter9.html">Chapter 9: Data Smoothing</a></li>
-            <li><a href="chapter10.html">Chapter 10: Censored or Truncated Data</a></li>
-        </ul>
-    </nav>
+
     <main>
         Some general comments to keep in mind (these might sound repetative, but one can't stress them enough!):
         <ol>
@@ -49,6 +97,109 @@
                 problem. </li>
         </ol>
     </main>
+
+    <nav>
+        <h3>Table of Contents</h3>
+        <ul>
+            <li><a href="chapter1.html">Chapter 1: Introductory Probability Theory</a></li>
+            <ul>
+                <li><a href="chapter1.html#basic-definitions">Basic Definitions</a></li>
+                <li><a href="chapter1.html#popular-probability-distributions">Some Popular Probability Distributions</a>
+                </li>
+                <li><a href="chapter1.html#central-limit-theorem">The Central Limit Theorem</a></li>
+                <li><a href="chapter1.html#maximum-likelihood-estimators">Maximum Likelihood Estimators</a></li>
+                <li><a href="chapter1.html#confidence-intervals">Confidence Intervals</a></li>
+                <li><a href="chapter1.html#hypothesis-testing">Hypothesis Testing</a></li>
+                <li><a href="chapter1.html#resampling-methods">Resampling Methods</a></li>
+            </ul>
+
+            <li><a href="chapter2.html">Chapter 2: Nonparametric Statistics</a></li>
+            <ul>
+                <li><a href="chapter2.html#ks-statistic">Kolmogorov-Smirnov Statistics</a></li>
+                <li><a href="chapter2.html#wilcoxon">Wilcoxon Sum of Ranks Test</a></li>
+                <li><a href="chapter2.html#spearman">Spearman Rank Correlation Test</a></li>
+                <li><a href="chapter2.html#others">Other Important Non-parametric Tests</a></li>
+                <li><a href="chapter2.html#contingency">Contingency Tables</a></li>
+            </ul>
+
+            <li><a href="chapter3.html">Chapter 3: Regression</a></li>
+            <ul>
+                <li><a href="chapter3.html#ols">Ordinary Least Squares Regression</a></li>
+                <li><a href="chapter3.html#robust">Robust Regression</a></li>
+                <li><a href="chapter3.html#weight-ls">Weighted Least Squares</a></li>
+                <li><a href="chapter3.html#logistic">Logistic Regression</a></li>
+            </ul>
+
+            <li><a href="chapter4.html">Chapter 4: Time Series Analysis</a></li>
+            <ul>
+                <li><a href="chapter4.html#even">Evenly Spaced Data</a></li>
+                <ul>
+                    <li><a href="chapter4.html#acf">Autocorrelation Function</a></li>
+                    <li><a href="chapter4.html#pacf">Partial Autocorrelation Function</a></li>
+                    <li><a href="chapter4.html#arma">ARMA Models</a></li>
+                    <li><a href="chapter4.html#arima">ARIMA Models</a></li>
+                    <li><a href="chapter4.html#fourier">Fourier Analysis</a></li>
+                </ul>
+                <li><a href="chapter4.html#uneven">Unevenly Spaced Data</a></li>
+                <ul>
+                    <li><a href="chapter4.html#lomb-scargle">Lomb-Scargle Periodogram</a></li>
+                    <li><a href="chapter4.html#wavelet">Wavelet Analysis</a></li>
+                </ul>
+            </ul>
+
+            <li><a href="chapter5.html">Chapter 5: Multivariate Statistics</a></li>
+            <ul>
+                <li><a href="chapter5.html#pca">Principal Component Analysis</a></li>
+                <li><a href="chapter5.html#ica">Independent Component Analysis</a></li>
+            </ul>
+        </ul>
+
+        <li><a href="chapter6.html">Chapter 6: Bayesian Statistics</a></li>
+        <li><a href="chapter7.html">Chapter 7: Data Clustering and Classification</a></li>
+        <ul>
+            <li><a href="chapter7.html#uc">Unsupervised Clustering</a></li>
+            <ul>
+                <li><a href="chapter7.html#he">Hierarchical Clustering</a></li>
+                <li><a href="chapter7.html#kmc">K-Means Clustering</a></li>
+                <li><a href="chapter7.html#dbs">Density-Based Spatial Clustering of Applications with Noise (DBSCAN)</a>
+                </li>
+            </ul>
+            <li><a href="chapter7.html#sc">Supervised Clustering</a></li>
+            <ul>
+                <li><a href="chapter7.html#lda">Linear Discriminant Analysis (LDA)</a></li>
+                <li><a href="chapter7.html#tree">Classification Trees</a></li>
+                <li><a href="chapter7.html#knn">K-Nearest Neighbors (KNN)</a></li>
+            </ul>
+        </ul>
+
+        <li><a href="chapter8.html">Chapter 8: Spatial Point Processes</a></li>
+        <ul>
+            <li><a href="chapter8.html#csr">Complete Spatial Randomness</a></li>
+            <li><a href="chapter8.html#spa_auto_corr">Spatial Autocorrelation</a></li>
+            <li><a href="chapter8.html#kriging">Kriging</a></li>
+        </ul>
+
+        <li><a href="chapter9.html">Chapter 9: Data Smoothing</a></li>
+        <ul>
+            <li><a href="chapter9.html#kde">Kernel Density Estimates</a></li>
+            <li><a href="chapter9.html#adapt">Adaptive Smoothing</a></li>
+            <li><a href="chapter9.html#nonparam-regress">Nonparametric Regression</a></li>
+            <ul>
+                <li><a href="chapter9.html#nw">Nadaraya-Watson Estimator</a></li>
+                <li><a href="chapter9.html#spline">Spline Smoothing</a></li>
+            </ul>
+        </ul>
+
+        <li><a href="chapter10.html">Chapter 10: Censored or Truncated Data</a></li>
+        <ul>
+            <li><a href="chapter10.html#definitions">Basic Definitions</a></li>
+            <li><a href="chapter10.html#kaplan-meier">Kaplan-Meier Estimator</a></li>
+            <li><a href="chapter10.html#cox">Cox Regression</a></li>
+            <li><a href="chapter10.html#lbw">Lynden-Bell and Woodroofe Estimator</a></li>
+        </ul>
+        </ul>
+    </nav>
+
 </body>
 
 </html>
